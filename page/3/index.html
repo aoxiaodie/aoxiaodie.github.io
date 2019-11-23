@@ -150,7 +150,7 @@
 
 
 
-</head>
+<link rel="stylesheet" type="text/css" href="/assets/css/DPlayer.min.css"><script src="/assets/js/DPlayer.min.js"></script></head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
 
@@ -243,188 +243,6 @@
           <div id="content" class="content">
             
   <section id="posts" class="posts-expand">
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://aoxiaodie.github.io/2017/12/16/blogs-about/Markdown/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="嗷小蝶">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="aoxiaodie">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2017/12/16/blogs-about/Markdown/" itemprop="url">如何在博客文章中使用Markdown</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-12-16T15:16:58+08:00">
-                2017-12-16
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/博客搭建教程/" itemprop="url" rel="index">
-                    <span itemprop="name">博客搭建教程</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="Markdown简介"><a href="#Markdown简介" class="headerlink" title="Markdown简介"></a>Markdown简介</h1><p>Markdown是一种可以使用普通文本编辑器编写的标记语言，通过简单的标记语法，可以使普通文本内容具有一定的格式。<br>Markdown的语法简洁明了、学习容易，而且功能比纯文本更强，因此我们用它来写博客。<br><br><br><br></p>
-<h1 id="语法"><a href="#语法" class="headerlink" title="语法"></a>语法</h1><h2 id="标题"><a href="#标题" class="headerlink" title="标题"></a>标题</h2><p>行首插入1-6个 # ，每增加一个 # 表示更深入层次的内容，对应到标题的深度由 1-6 阶。<br>如：<br>H1 :# Header 1<br>H2 :## Header 2<br>H3 :### Header 3<br>H4 :#### Header 4<br>H5 :##### Header 5<br>H6 :###### Header 6<br><strong>符号和文字之间都要记得加一个空格</strong><br><br></p>
-<h2 id="列表"><a href="#列表" class="headerlink" title="列表"></a>列表</h2><p>在文字前加上-或者一个星号，即无序列表；<br>在文字前加数字即有序列表。<br><strong>符号和文字之间都要记得加一个空格</strong><br><br></p>
-<h2 id="文本样式"><a href="#文本样式" class="headerlink" title="文本样式"></a>文本样式</h2><p>（1）斜体：文字前后各加一个星号<br>结果为 <em>title</em></p>
-<p>（2）粗体：文字前后各加两个星号<br>结果为 <strong>title</strong></p>
-<p><strong>这里注意一点，星号与星号之间不能有空格。第一个星号之前如果有文字，则要加空格。</strong></p>
-<p>（3）删除线：文字前后各加两个波浪线~<br>结果为 <del>text</del></p>
-<p>（4）引用：&gt;后接引用内容</p>
-<p>（5）分隔线：三个星号***<br><br></p>
-<h2 id="链接"><a href="#链接" class="headerlink" title="链接"></a>链接</h2><p>网址链接：方括号加小括号，[]里面填名称，()里面填地址；<br>图片链接：在[]前面加!，其他的相同。<br><br></p>
-<h2 id="代码块"><a href="#代码块" class="headerlink" title="代码块"></a>代码块</h2><p><img src="/assets/image/data/code.png" alt="code"><br>结果为：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Welcome</span> </span>&#123;</span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span></span>&#123;</span><br><span class="line">    System.out.println(<span class="string">"Welcome to Java!"</span>);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p><br></p>
-<h2 id="表格"><a href="#表格" class="headerlink" title="表格"></a>表格</h2><p>Markdown绘制表格有些麻烦，首先必须在标题下绘制。<br>但是如果用HTML的话，页面里总会莫名其妙出现很多空白行，暂时不知道怎么解决。</p>
-<p><img src="/assets/image/data/table.png" alt="table"><br>其中第一行为表头，第二行分隔表头和主体部分，第三行开始每一行代表一个表格行。<br>可在第二行指定不同列单元格内容的对齐方式，默认为左对齐，在 “-” 右边加上 “:” 为右对齐，在 “-” 两侧同时加上 “:” 为居中对齐。</p>
-<p>结果为：</p>
-<h3 id="table"><a href="#table" class="headerlink" title="table"></a>table</h3><table>
-<thead>
-<tr>
-<th>Tables</th>
-<th style="text-align:center">Are</th>
-<th style="text-align:right">Cool</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>col 3 is</td>
-<td style="text-align:center">right-aligned</td>
-<td style="text-align:right">$1600</td>
-</tr>
-<tr>
-<td>col 2 is</td>
-<td style="text-align:center">centered</td>
-<td style="text-align:right">$12</td>
-</tr>
-<tr>
-<td>zebra stripes</td>
-<td style="text-align:center">are neat</td>
-<td style="text-align:right">$1</td>
-</tr>
-</tbody>
-</table>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
     
       
 
@@ -2545,6 +2363,154 @@
 
 
     
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://aoxiaodie.github.io/2017/08/26/vae-fans/vae-fans/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="嗷小蝶">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="aoxiaodie">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2017/08/26/vae-fans/vae-fans/" itemprop="url">许你十年，一如既往——歌迷群纪念视频</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-08-26T17:14:45+08:00">
+                2017-08-26
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/南昌大学许嵩歌迷群纪念作品/" itemprop="url" rel="index">
+                    <span itemprop="name">南昌大学许嵩歌迷群纪念作品</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <div id="dplayer4" class="dplayer hexo-tag-dplayer-mark" style="margin-bottom: 20px;"></div><script>(function(){var player = new DPlayer({"container":document.getElementById("dplayer4"),"video":{"url":"/assets/audio/VaeFans01.webm"}});window.dplayers||(window.dplayers=[]);window.dplayers.push(player);})()</script>
+<center>找了很久，找到之前写得群简介<br>《让我知道你们一直在就好》</center>
+
+<blockquote>
+<p>让我知道你们一直在就好<br>群壮大到现在，其实是我不曾想过的。最初建群完全是一时兴起。<br>申请建群，建群成功，里面空空荡荡只有我一个人。<br>然后开始漫漫寻人之途。<br>通过贴吧发帖，逐渐有人加群，只有两三个时，我怕太寂寞，把万山那头的妹纸也拉了进来。<br>看着这个群,从1个人到10个人到20个人再到50个<br>人最后80个人，真的很开心。<br>也许这么多人里，喜欢嵩哥只是年少时，亦或是听过一些歌，喜欢过一些歌，又或者是因为一些人一些事，但其实并没有关系。<br>我一直希望，歌迷群能给你们带来温暖，这里有你相识的伙伴，让你可以开怀大笑毫无拘束地聊天吐槽。<br>只要你曾经出现过，我都会努力记住你。如果哪一天，你有了新的选择，可以把群放在助手里，让我知道，你们一直在就好。<br>我喜欢嵩哥,因为他贯穿了我的青春年少。<br>没有早恋过，<br>他们说，你没有青春，<br>没有逃过学,没有做过那么多刻骨铭心的事,可是，<br>我把所有的疯狂<br>都给了他，他就是我的青春年少。</p>
+</blockquote>
+<center><br>曾经有段时间，真的把群看得特别重要。<br>也倾入自己大部分的精力时间。<br>后来渐渐释怀，没有什么是永远不变的。<br>但该在的一直都在。<br></center>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
   </section>
 
   
@@ -2593,7 +2559,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/">
-                <span class="site-state-item-count">33</span>
+                <span class="site-state-item-count">32</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
