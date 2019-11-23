@@ -2,11 +2,11 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
   <title>aoxiaodie</title>
   
-  <subtitle>江南烟雨却痴缠</subtitle>
+  <subtitle>飘然一曲诱我侧耳听</subtitle>
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://aoxiaodie.github.io/"/>
-  <updated>2019-11-22T11:20:34.277Z</updated>
+  <updated>2019-11-23T14:58:22.430Z</updated>
   <id>https://aoxiaodie.github.io/</id>
   
   <author>
@@ -15,6 +15,29 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>更换电脑后如何在新电脑重新搭建环境</title>
+    <link href="https://aoxiaodie.github.io/2019/11/23/blogs-about/hexo-new/"/>
+    <id>https://aoxiaodie.github.io/2019/11/23/blogs-about/hexo-new/</id>
+    <published>2019-11-23T07:27:57.000Z</published>
+    <updated>2019-11-23T14:58:22.430Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="写在前面"><a href="#写在前面" class="headerlink" title="写在前面"></a>写在前面</h1><p>一年没有更新博客了，最近又写了很多东西想要更新，结果换了公司的电脑，部署的时候出现问题，弄了两天才好。<br>为此，我决定写下我的踩坑步骤。<br><br><br><br><br><br></p><h1 id="环境准备"><a href="#环境准备" class="headerlink" title="环境准备"></a>环境准备</h1><p>跟搭建的时候一样，需要安装Node.js和Git，具体看之前的文章。<br><a href="http://aoxiaodie.cn/2017/11/27/blogs-about/Hexo-and-Github/" target="_blank" rel="noopener">基于Hexo和Github搭建属于自己的博客</a><br><br><br><br><br><br></p><h1 id="SSH配置"><a href="#SSH配置" class="headerlink" title="SSH配置"></a>SSH配置</h1><p>同样跟搭建时一样，另外有几个注意点：<br>1、user_name是Github的用户名；<br>user_email同。<br><br><br>2、直接用电脑终端进行操作。<br><br><br><br><br><br></p><h1 id="Hexo安装配置"><a href="#Hexo安装配置" class="headerlink" title="Hexo安装配置"></a>Hexo安装配置</h1><h2 id="新建文件夹"><a href="#新建文件夹" class="headerlink" title="新建文件夹"></a>新建文件夹</h2><p>新建一个文件夹用于存放hexo<br>并将原来文件里的 <strong>_config.yml、theme、source、scaffolds、package.json、.gitignore</strong> 6 个文件拷贝放入新文件夹中。<br><br></p><h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><p>使用Git bash在新建的hexo目录下操作<br>分别输入：</p><blockquote><p>npm install hexo-cli -g<br>npm install hexo - -save</p></blockquote><p>运行完之后，再输入以下命令检查是否安装成功</p><blockquote><p>hexo -v</p></blockquote><p><br></p><h2 id="初始化"><a href="#初始化" class="headerlink" title="初始化"></a>初始化</h2><blockquote><p>hexo init<br>npm install</p></blockquote><p>此时查看hexo目录下文件已经完整了，跟原来的相同。<br><br></p><h2 id="部署发布"><a href="#部署发布" class="headerlink" title="部署发布"></a>部署发布</h2><blockquote><p>hexo s # 本地预览，通过访问<a href="http://0.0.0.0:4000/" target="_blank" rel="noopener">http://localhost:4000/</a><br>hexo d -g # 部署，最终显示在博客上</p></blockquote><p><br><br><br><br><br></p><h1 id="自定义主页"><a href="#自定义主页" class="headerlink" title="自定义主页"></a>自定义主页</h1><p>重新部署后发现自定义的主页消失了，在网上找了一圈，最先找到的是这个：</p><blockquote><p>在hexo根目录/source文件夹下新建一个index.md即可</p></blockquote><p>但我的自定义index.md一直都在，又找了许久，终于找到这个：</p><blockquote><p>删除node_modules里的hexo-generator-index模块（因为这个是用来渲染主页的，自定义主页不需要）</p></blockquote><p>联想一下，我们的node_modules是重新生成的，所以存在hexo-generator-index模块，这就导致自定义主页显示。</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h1 id=&quot;写在前面&quot;&gt;&lt;a href=&quot;#写在前面&quot; class=&quot;headerlink&quot; title=&quot;写在前面&quot;&gt;&lt;/a&gt;写在前面&lt;/h1&gt;&lt;p&gt;一年没有更新博客了，最近又写了很多东西想要更新，结果换了公司的电脑，部署的时候出现问题，弄了两天才好。&lt;br&gt;为此，我决定写
+      
+    
+    </summary>
+    
+      <category term="博客搭建教程" scheme="https://aoxiaodie.github.io/categories/%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA%E6%95%99%E7%A8%8B/"/>
+    
+    
+  </entry>
   
   <entry>
     <title>python入门之装饰器、迭代器、面向对象、异常处理等</title>
@@ -450,29 +473,6 @@
     </summary>
     
       <category term="游戏开发" scheme="https://aoxiaodie.github.io/categories/%E6%B8%B8%E6%88%8F%E5%BC%80%E5%8F%91/"/>
-    
-    
-  </entry>
-  
-  <entry>
-    <title>如何在博客文章中使用Markdown</title>
-    <link href="https://aoxiaodie.github.io/2017/12/16/blogs-about/Markdown/"/>
-    <id>https://aoxiaodie.github.io/2017/12/16/blogs-about/Markdown/</id>
-    <published>2017-12-16T07:16:58.000Z</published>
-    <updated>2019-02-27T08:30:11.326Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="Markdown简介"><a href="#Markdown简介" class="headerlink" title="Markdown简介"></a>Markdown简介</h1><p>Markdown是一种可以使用普通文本编辑器编写的标记语言，通过简单的标记语法，可以使普通文本内容具有一定的格式。<br>Markdown的语法简洁明了、学习容易，而且功能比纯文本更强，因此我们用它来写博客。<br><br><br><br></p><h1 id="语法"><a href="#语法" class="headerlink" title="语法"></a>语法</h1><h2 id="标题"><a href="#标题" class="headerlink" title="标题"></a>标题</h2><p>行首插入1-6个 # ，每增加一个 # 表示更深入层次的内容，对应到标题的深度由 1-6 阶。<br>如：<br>H1 :# Header 1<br>H2 :## Header 2<br>H3 :### Header 3<br>H4 :#### Header 4<br>H5 :##### Header 5<br>H6 :###### Header 6<br><strong>符号和文字之间都要记得加一个空格</strong><br><br></p><h2 id="列表"><a href="#列表" class="headerlink" title="列表"></a>列表</h2><p>在文字前加上-或者一个星号，即无序列表；<br>在文字前加数字即有序列表。<br><strong>符号和文字之间都要记得加一个空格</strong><br><br></p><h2 id="文本样式"><a href="#文本样式" class="headerlink" title="文本样式"></a>文本样式</h2><p>（1）斜体：文字前后各加一个星号<br>结果为 <em>title</em></p><p>（2）粗体：文字前后各加两个星号<br>结果为 <strong>title</strong></p><p><strong>这里注意一点，星号与星号之间不能有空格。第一个星号之前如果有文字，则要加空格。</strong></p><p>（3）删除线：文字前后各加两个波浪线~<br>结果为 <del>text</del></p><p>（4）引用：&gt;后接引用内容</p><p>（5）分隔线：三个星号***<br><br></p><h2 id="链接"><a href="#链接" class="headerlink" title="链接"></a>链接</h2><p>网址链接：方括号加小括号，[]里面填名称，()里面填地址；<br>图片链接：在[]前面加!，其他的相同。<br><br></p><h2 id="代码块"><a href="#代码块" class="headerlink" title="代码块"></a>代码块</h2><p><img src="/assets/image/data/code.png" alt="code"><br>结果为：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Welcome</span> </span>&#123;</span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span></span>&#123;</span><br><span class="line">    System.out.println(<span class="string">"Welcome to Java!"</span>);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p><p><br></p><h2 id="表格"><a href="#表格" class="headerlink" title="表格"></a>表格</h2><p>Markdown绘制表格有些麻烦，首先必须在标题下绘制。<br>但是如果用HTML的话，页面里总会莫名其妙出现很多空白行，暂时不知道怎么解决。</p><p><img src="/assets/image/data/table.png" alt="table"><br>其中第一行为表头，第二行分隔表头和主体部分，第三行开始每一行代表一个表格行。<br>可在第二行指定不同列单元格内容的对齐方式，默认为左对齐，在 “-” 右边加上 “:” 为右对齐，在 “-” 两侧同时加上 “:” 为居中对齐。</p><p>结果为：</p><h3 id="table"><a href="#table" class="headerlink" title="table"></a>table</h3><table><thead><tr><th>Tables</th><th style="text-align:center">Are</th><th style="text-align:right">Cool</th></tr></thead><tbody><tr><td>col 3 is</td><td style="text-align:center">right-aligned</td><td style="text-align:right">$1600</td></tr><tr><td>col 2 is</td><td style="text-align:center">centered</td><td style="text-align:right">$12</td></tr><tr><td>zebra stripes</td><td style="text-align:center">are neat</td><td style="text-align:right">$1</td></tr></tbody></table>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;h1 id=&quot;Markdown简介&quot;&gt;&lt;a href=&quot;#Markdown简介&quot; class=&quot;headerlink&quot; title=&quot;Markdown简介&quot;&gt;&lt;/a&gt;Markdown简介&lt;/h1&gt;&lt;p&gt;Markdown是一种可以使用普通文本编辑器编写的标记语言，通过简单的标记语
-      
-    
-    </summary>
-    
-      <category term="博客搭建教程" scheme="https://aoxiaodie.github.io/categories/%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA%E6%95%99%E7%A8%8B/"/>
     
     
   </entry>
