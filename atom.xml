@@ -210,14 +210,14 @@
     <published>2018-08-17T07:13:16.000Z</published>
     <updated>2019-02-27T08:32:23.871Z</updated>
     
-    <content type="html"><![CDATA[<p>这个视频是给我麻麻过生日的时候录的，也懒得在录一般正式版的了，总之差不多。</p><div id="dplayer2" class="dplayer hexo-tag-dplayer-mark" style="margin-bottom: 20px;"></div><script>(function(){var player = new DPlayer({"container":document.getElementById("dplayer2"),"video":{"url":"/assets/audio/ao.webm"}});window.dplayers||(window.dplayers=[]);window.dplayers.push(player);})()</script><p>主要讲一讲完成游戏的过程，因为没有系统地学过C#，所以脚本这块只能粗略地描述一番。</p>]]></content>
+    <content type="html"><![CDATA[<p>这个视频是给我麻麻过生日的时候录的，也懒得在录一般正式版的了，总之差不多。</p><div id="dplayer1" class="dplayer hexo-tag-dplayer-mark" style="margin-bottom: 20px;"></div><script>(function(){var player = new DPlayer({"container":document.getElementById("dplayer1"),"video":{"url":"/assets/audio/ao.webm"}});window.dplayers||(window.dplayers=[]);window.dplayers.push(player);})()</script><p>主要讲一讲完成游戏的过程，因为没有系统地学过C#，所以脚本这块只能粗略地描述一番。</p>]]></content>
     
     <summary type="html">
     
       
       
         &lt;p&gt;这个视频是给我麻麻过生日的时候录的，也懒得在录一般正式版的了，总之差不多。&lt;/p&gt;
-&lt;div id=&quot;dplayer2&quot; class=&quot;dplayer hexo-tag-dplayer-mark&quot; style=&quot;margin-bottom: 20px;&quot;&gt;&lt;/div&gt;&lt;sc
+&lt;div id=&quot;dplayer1&quot; class=&quot;dplayer hexo-tag-dplayer-mark&quot; style=&quot;margin-bottom: 20px;&quot;&gt;&lt;/div&gt;&lt;sc
       
     
     </summary>
