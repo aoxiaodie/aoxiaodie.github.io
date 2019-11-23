@@ -1,0 +1,761 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.2" rel="stylesheet" type="text/css">
+
+
+  <meta name="keywords" content="Hexo, NexT">
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="aoxiaodie" type="application/atom+xml">
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.2">
+
+
+
+
+
+
+<meta name="description" content="LINPACK是线性系统软件包(Linear system package) 的缩写，其用于测试高性能计算机系统浮点性能的benchmark。通过利用高性能计算机，用高斯消元法求解N元一次稠密线性代数方程组的测试，评价高性能计算机的浮点性能。而HPL（High Performance Linpack）是Linpack测试三类之一。 搭建HPL测试环境主要有这些步骤：编译器的安装数学库GotoBLA">
+<meta property="og:type" content="article">
+<meta property="og:title" content="HPL环境安装与错误集合">
+<meta property="og:url" content="https://aoxiaodie.github.io/2018/02/01/HPL/index.html">
+<meta property="og:site_name" content="aoxiaodie">
+<meta property="og:description" content="LINPACK是线性系统软件包(Linear system package) 的缩写，其用于测试高性能计算机系统浮点性能的benchmark。通过利用高性能计算机，用高斯消元法求解N元一次稠密线性代数方程组的测试，评价高性能计算机的浮点性能。而HPL（High Performance Linpack）是Linpack测试三类之一。 搭建HPL测试环境主要有这些步骤：编译器的安装数学库GotoBLA">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="https://aoxiaodie.github.io/2018/02/01/HPL/assets/image.data/HPL/GotoBLAS2_error.png">
+<meta property="og:image" content="https://aoxiaodie.github.io/2018/02/01/HPL/assets/image.data/HPL/GotoBLAS2_success.png">
+<meta property="og:image" content="https://aoxiaodie.github.io/2018/02/01/HPL/assets/image.data/HPL/mpich.png">
+<meta property="og:image" content="https://aoxiaodie.github.io/2018/02/01/HPL/...">
+<meta property="og:updated_time" content="2019-02-26T06:31:46.525Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="HPL环境安装与错误集合">
+<meta name="twitter:description" content="LINPACK是线性系统软件包(Linear system package) 的缩写，其用于测试高性能计算机系统浮点性能的benchmark。通过利用高性能计算机，用高斯消元法求解N元一次稠密线性代数方程组的测试，评价高性能计算机的浮点性能。而HPL（High Performance Linpack）是Linpack测试三类之一。 搭建HPL测试环境主要有这些步骤：编译器的安装数学库GotoBLA">
+<meta name="twitter:image" content="https://aoxiaodie.github.io/2018/02/01/HPL/assets/image.data/HPL/GotoBLAS2_error.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://aoxiaodie.github.io/2018/02/01/HPL/">
+
+
+
+
+
+  <title>HPL环境安装与错误集合 | aoxiaodie</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">aoxiaodie</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">江南烟雨却痴缠</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            主页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-book"></i> <br>
+            
+            文章
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-collocation">
+          <a href="/tags/收藏" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-folder-open"></i> <br>
+            
+            收藏
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://aoxiaodie.github.io/2018/02/01/HPL/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="嗷小蝶">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="aoxiaodie">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">HPL环境安装与错误集合</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-02-01T13:18:11+08:00">
+                2018-02-01
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Linpack测试环境搭建问题集合/" itemprop="url" rel="index">
+                    <span itemprop="name">Linpack测试环境搭建问题集合</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>LINPACK是线性系统软件包(Linear system package) 的缩写，其用于测试高性能计算机系统浮点性能的benchmark。通过利用高性能计算机，用高斯消元法求解N元一次稠密线性代数方程组的测试，评价高性能计算机的浮点性能。<br>而HPL（High Performance Linpack）是Linpack测试三类之一。</p>
+<p>搭建HPL测试环境主要有这些步骤：<br><b><a href="#bianyiqi">编译器的安装</a></b><br><b><a href="#GotoBLAS2">数学库GotoBLAS2</a></b><br><b><a href="#MPICH">并行环境MPICH</a></b><br><b><a href="#hpl">hpl</a></b></p>
+<p>系统环境：ubuntu 16.04 LTS<br><br><br><br><br><br></p>
+<hr>
+<p><a id="bianyiqi"><b>编译器的安装</b></a><br>（1）gcc（一般系统自带）<br>可以用下面的指令查看<code>gcc --version</code>。<br><br><br>（2）gfortran（可选，我安装了gfortran 5.4.0）<br>主要是后面编译MPICH时需要用到，如果不安装，可以直接加<code>--disable-gfortran</code>。<br><br><br><br><br><br></p>
+<hr>
+<p><a id="GotoBLAS2"><b>数学库GotoBLAS2</b></a><br>（1）直接在官网上下载：GotoBLAS2-1.13.tar.gz<br>（2）解压：<code>tar -xzf GotoBLAS2-1.13.tar.gz</code><br>（3）在解压后的文件夹中运行：<code>make CC=gcc BINARY=64 TARGET=NEHALEM</code>，但是如果用这种方法编译，会遇到下面这个错误，直接影响最后hpl的编译。<br>错误信息：</p>
+<blockquote>
+<p>linux/bin/ld: cannot find -l-l<br>collect2: error: ld returned 1 exit status</p>
+</blockquote>
+<p>解决方法就是找到文件夹中的f_check，修改第298行：<code>print MAKEFILE &quot;FEXTRALIB=$linker_L   -lgfortran -lm -lquadmath -lm $linker_a\n&quot;;</code><br><img src="assets/image.data/HPL/GotoBLAS2_error.png" alt="GotoBLAS2"><br><br><br>当然，也可以用另一种方法，修改GotoBLAS2文件夹中的<code>Makefile.rule</code>，去掉注释</p>
+<blockquote>
+<p>VERSION = 1.13<br>TARGET = NEHALEM<br>BINARY=64        //64位操作系统<br>USE_OPENMP = 1<br>INTERFACE64 = 1</p>
+</blockquote>
+<p>然后运行GotoBLAS2中的建立文件，即: <code>./quickbuild.64bit</code>。<br>如果出现下面这些，则表示安装成功。<br><img src="assets/image.data/HPL/GotoBLAS2_success.png" alt="GotoBLAS2_SUCCESS"><br><br><br><br><br><br></p>
+<hr>
+<p><a id="MPICH"><b>并行环境MPICH</b></a><br>（1）在官网下载：<strong>不要下载mpich-3.2.1，这个版本的在编译后会缺少“libmpich.a”文件，导致最后make arch时候一直报错，为了这个error我纠结了好几天。</strong><br><br><br>当时用了3.2.1版本，前面都没有出错，到最后<code>make arch=Linux</code>时，会一直报错。<br>错误信息：</p>
+<blockquote>
+<p>gfortran:error:/home/mpich-3.2.1/lib/libmpich.a:没有那个文件或目录</p>
+</blockquote>
+<p>然后我打开lib文件夹发现真的没有这个文件，只有“libmpich.so”文件（.a是静态链接库，.so是动态链接库）<br><br><br>我把它改成“libmpich.so”或者“libmpi.a”，结果还是报错<br>错误信息：</p>
+<blockquote>
+<p>collect2: error: ld returned 1 exit status<br>Makefile:76: recipe for target ‘dexe.grd’ failed<br>make[2]: [dexe.grd] Error 1<br>make[2]: Leaving directory ‘/home/…’<br>Make.top:64: recipe for target ‘build_tst’ failed<br>make[1]: [build_tst] Error 2<br>make[1]: Leaving directory ‘/home/…’<br>Makefile:72: recipe for target ‘build’ failed<br>make: [build] Error 2</p>
+</blockquote>
+<p><br><br>最简单粗暴的解决方法就是换一个版本。<br><img src="assets/image.data/HPL/mpich.png" alt="mpich-3.0.4"></p>
+<p><center><strong>下载3.0.4版本</strong></center><br><br><br>（2）解压<br>（3）建一个安装文件夹setmpich<br>（4）在解压文件夹中：<code>./configure --prefix=/home/username/setmpich</code>，路径写setmpich文件夹所在的路径，可以在该文件夹中运行<code>pwd</code>查看。<br>（5）make<br>（6）make install<br>（7）配置环境变量，如果没有安装Vim，直接<code>gedit ~/.bashrc</code><br>在最后添加：</p>
+<blockquote>
+<p>export PATH=/home/username/setmpich/bin:$PATH<br>export LD_LIBRARY_PATH=/home/username/setmpich/lib:$LD_LIBRARY_PATH</p>
+</blockquote>
+<p>保存并退出。<br>（8）更新配置：<code>source ~/.bashrc</code><br>（9）检测是否将命令导出成功：<code>which mpirun</code><br>如果成功就为会显示你的安装路径，如<code>/home/username/setmpich/bin</code><br>（10）测试<br>打开mpich解压文件夹中的examples，运行cpi：<code>mpiexec -np 4 ./cpi</code>，出现下列结果，则安装成功。<br><img src="..." alt="MPICH_SUCCESS"><br>（我忘记截图了…）<br><br><br><br><br><br></p>
+<hr>
+<p><a id="hpl"><b>hpl</b></a><br>（1）下载hpl-2.2<br>（2）解压<br>（3）在解压文件夹中的setup文件夹中找到文件Make.Linux_PII_FBLAS，并把它移到上层目录，然后重命名，我把它命名成Make.Linux<br>（4）修改Make.Linux文件：</p>
+<blockquote>
+<p>ARCH         = Linux<br>TOPdir       = $(HOME)/hpl-2.2   //  改为hpl解压后产生的文件夹<br>MPdir        = /home/username/setmpich   //  改为mpich安装文件夹<br>LAdir        = $(HOME)/GotoBLAS2 //  GotoBLAS2解压文件夹<br>LAlib        = $(LAdir)/libgoto2.a $(LAdir)/libgoto2.so<br>HPL_OPTS     = -DHPL_CALL_CBLAS<br>CC           = /home/username/setmpich/bin/mpicc<br>LINKER       = /home/username/setmpich/bin/mpif77</p>
+</blockquote>
+<p>（5）在解压文件夹下<code>make arch=Linux</code><br>此时安装文件夹下bin中会有Linux文件夹，打开，如果看到HPL.dat  xhpl这两个文件，则安装成功。</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/12/20/games-development/learnopengl/" rel="next" title="learnOpenGL">
+                <i class="fa fa-chevron-left"></i> learnOpenGL
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/02/06/language/C#/" rel="prev" title="C# 入门">
+                C# 入门 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+
+      <section class="site-overview sidebar-panel sidebar-panel-active">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image" src="/images/avatar.gif" alt="嗷小蝶">
+          <p class="site-author-name" itemprop="name">嗷小蝶</p>
+           
+              <p class="site-description motion-element" itemprop="description">雾里看花也不失为一种幸福</p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/">
+                <span class="site-state-item-count">33</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">10</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">1</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+          <div class="feed-link motion-element">
+            <a href="/atom.xml" rel="alternate">
+              <i class="fa fa-rss"></i>
+              RSS
+            </a>
+          </div>
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="http://github.com" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                    
+                      GitHub
+                    
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/u/1852414964/home?wvr=5&lf=reg" target="_blank" title="Weibo">
+                  
+                    <i class="fa fa-fw fa-weibo"></i>
+                  
+                    
+                      Weibo
+                    
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">嗷小蝶</span>
+
+  
+</div>
+
+
+  <!--<div class="powered-by">
+    由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+  </div>
+  -->
+  
+  <div class="powered-by">
+  <i class="fa fa-user-md"></i><span id="busuanzi_container_site_uv">
+    本站访客数:<span id="busuanzi_value_site_uv"></span>
+  </span>
+  </div>
+
+  <span class="post-meta-divider">|</span>
+
+  <div class="theme-info">
+    主题 &mdash;
+    <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+      NexT.Muse
+    </a>
+  </div>
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.2"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.2"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

@@ -1,0 +1,790 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.2" rel="stylesheet" type="text/css">
+
+
+  <meta name="keywords" content="Hexo, NexT">
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="aoxiaodie" type="application/atom+xml">
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.2">
+
+
+
+
+
+
+<meta name="description" content="程序结构Hello World实例一个C#程序主要包括：命名空间声明、一个class、class方法、class属性、Main方法、语句和表达式、注释。 123456789using System;namespace HelloWorldApplication&amp;#123;// 一个 namespace 是一系列的类。HelloWorldApplication 命名空间包含了类 HelloWorld">
+<meta property="og:type" content="article">
+<meta property="og:title" content="C# 入门">
+<meta property="og:url" content="https://aoxiaodie.github.io/2018/02/06/language/C#/index.html">
+<meta property="og:site_name" content="aoxiaodie">
+<meta property="og:description" content="程序结构Hello World实例一个C#程序主要包括：命名空间声明、一个class、class方法、class属性、Main方法、语句和表达式、注释。 123456789using System;namespace HelloWorldApplication&amp;#123;// 一个 namespace 是一系列的类。HelloWorldApplication 命名空间包含了类 HelloWorld">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2018-08-19T09:12:10.730Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="C# 入门">
+<meta name="twitter:description" content="程序结构Hello World实例一个C#程序主要包括：命名空间声明、一个class、class方法、class属性、Main方法、语句和表达式、注释。 123456789using System;namespace HelloWorldApplication&amp;#123;// 一个 namespace 是一系列的类。HelloWorldApplication 命名空间包含了类 HelloWorld">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://aoxiaodie.github.io/2018/02/06/language/C#/">
+
+
+
+
+
+  <title>C# 入门 | aoxiaodie</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">aoxiaodie</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">江南烟雨却痴缠</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            主页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-book"></i> <br>
+            
+            文章
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-collocation">
+          <a href="/tags/收藏" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-folder-open"></i> <br>
+            
+            收藏
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://aoxiaodie.github.io/2018/02/06/language/C#/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="嗷小蝶">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="aoxiaodie">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">C# 入门</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-02-06T14:18:30+08:00">
+                2018-02-06
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/高级程序语言/" itemprop="url" rel="index">
+                    <span itemprop="name">高级程序语言</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="程序结构"><a href="#程序结构" class="headerlink" title="程序结构"></a>程序结构</h1><h2 id="Hello-World实例"><a href="#Hello-World实例" class="headerlink" title="Hello World实例"></a>Hello World实例</h2><p>一个C#程序主要包括：命名空间声明、一个class、class方法、class属性、Main方法、语句和表达式、注释。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">using System;</span><br><span class="line">namespace HelloWorldApplication&#123;// 一个 namespace 是一系列的类。HelloWorldApplication 命名空间包含了类 HelloWorld。</span><br><span class="line">  clss HelloWord&#123;// 一个类</span><br><span class="line">    static void Main(string[] args)&#123;// 主方法</span><br><span class="line">      Console.WriteLine(&quot;Hello World&quot;);</span><br><span class="line">      Console.ReadKey();// 最后一行 Console.ReadKey(); 是针对 VS.NET 用户的。这使得程序会等待一个按键的动作，防止程序从 Visual Studio .NET 启动时屏幕会快速运行并关闭。</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><br><br><strong>注意点：</strong><br>1、大小写敏感；<br>2、与Java不同，文件名可以不同于类名。<br><br><br><br><br><br></p>
+<hr>
+<h1 id="基本语法"><a href="#基本语法" class="headerlink" title="基本语法"></a>基本语法</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line">using System</span><br><span class="line">namespace RectangleApplication&#123;</span><br><span class="line">  class Rectangle&#123;</span><br><span class="line">    double length;</span><br><span class="line">    double width;</span><br><span class="line">    public void Acceptdetails()&#123;</span><br><span class="line">      length = 4.5;</span><br><span class="line">      width = 3.5;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public double GetArea()&#123;</span><br><span class="line">      return length * width;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public void Display()&#123;</span><br><span class="line">      Console.WriteLine(&quot;Length: &#123;0&#125;&quot;,length);</span><br><span class="line">      Console.WriteLine(&quot;Width: &#123;0&#125;&quot;,width);</span><br><span class="line">      Console.WriteLine(&quot;Area: &#123;0&#125;&quot;,GetArea());</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  class ExecuteRectangle&#123;</span><br><span class="line">    static void Main(String[] args)&#123;</span><br><span class="line">      Rectangle r = new Rectangle();</span><br><span class="line">      r.Acceptdetails();</span><br><span class="line">      r.Display();</span><br><span class="line">      Console.ReadLine();</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="命名空间"><a href="#命名空间" class="headerlink" title="命名空间"></a>命名空间</h2><p>基本语法</p>
+<blockquote>
+<p>命名空间.命名空间…命名空间.类名.静态方法名(参数,…) ;</p>
+</blockquote>
+<p>如<code>System.Console.WriteLine(&quot;Hello World&quot;)</code><br><br></p>
+<h2 id="using关键字"><a href="#using关键字" class="headerlink" title="using关键字"></a>using关键字</h2><p>三个用途：<br>（1）作为引用指令，用于为命名空间导入其他命名空间中定义的类型。<br>如在程序开头加上<code>using System</code>，则<code>System.Console.WriteLine(&quot;Hello World&quot;)</code>可以直接写成<code>Console.WriteLine(&quot;Hello World&quot;)</code>。<br><br><br>（2）作为别称指令，用于简化命名空间的表达形式。<br>如<code>using WinForm=System.Windows.Form</code><br>这样一来，<code>System.Windows.Form.MessageBox.Show(&quot;hello&quot;)</code>可以简化为<code>WinForm.MessageBox.Show(&quot;hello&quot;)</code>。<br><br><br>（3）作为一个语句，用于定义一个范围。<br>using关键字可以用来创建using语句，该语句的作用是定义一个用大括号包围的范围，程序执行到此范围的末尾，会立即释放在using小括号内创建的对象。<br>如：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">static void Main()&#123;</span><br><span class="line">  using (TextWriter w = File.CreateText(&quot;test.txt&quot;))&#123;</span><br><span class="line">    w.WriteLine(&quot;Line one&quot;);</span><br><span class="line">    w.WriteLine(&quot;Line two&quot;);</span><br><span class="line">    w.WriteLine(&quot;Line three&quot;);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>using 关键字用于在程序中包含 System 命名空间。 一个程序一般有多个 using 语句。<br><br></p>
+<h2 id="Main方法"><a href="#Main方法" class="headerlink" title="Main方法"></a>Main方法</h2><p>Main方法只有两种类型的返回值，即只能声明为<code>public static int Main()</code>或者<code>public static void Main()</code>。<br><br></p>
+<h2 id="class关键字"><a href="#class关键字" class="headerlink" title="class关键字"></a>class关键字</h2><p>声明一个类。<br><br></p>
+<h2 id="标识符"><a href="#标识符" class="headerlink" title="标识符"></a>标识符</h2><p>类的命名必须遵循如下基本规则：<br>1、标识符由字母、数字、下划线和@组成，必须以字母、下划线或@开头；<br>2、不能是 C# 关键字；<br>3、区分大小写；<br>4、不能与 C# 类库名称相同。<br><br></p>
+<h2 id="C-关键字"><a href="#C-关键字" class="headerlink" title="C# 关键字"></a>C# 关键字</h2><p>1、保留关键字；<br>2、上下文关键字。<br><br><br><br><br><br></p>
+<hr>
+<h1 id="数据结构"><a href="#数据结构" class="headerlink" title="数据结构"></a>数据结构</h1><h2 id="值类型"><a href="#值类型" class="headerlink" title="值类型"></a>值类型</h2><p>从类System.ValueType中派生。<br>值类型直接包含数据。<br><br><br>如需得到一个类型或一个变量在特定平台上的准确尺寸，可以使用 sizeof 方法。表达式 sizeof(type) 产生以字节为单位存储对象或类型的存储尺寸。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">namespace DataTypeApplication&#123;</span><br><span class="line">  class Program&#123;</span><br><span class="line">    static void Main(String[] args)&#123;</span><br><span class="line">      Console.WriteLine(&quot;Size of int: &#123;0&#125;&quot;,sizeof(int));</span><br><span class="line">      Console.ReadLine();</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>输出结果为</p>
+<blockquote>
+<p>Size of int:4</p>
+</blockquote>
+<p><br></p>
+<p>##引用类型<br>引用类型不包含存储在变量中的实际数据，但它们包含对变量的引用，即该变量的位置。</p>
+<h3 id="对象（Object）类型"><a href="#对象（Object）类型" class="headerlink" title="对象（Object）类型"></a>对象（Object）类型</h3><p>1、对象类型是 C# 通用类型系统（Common Type System - CTS)中所有数据类型的终极基类。<br>2、Object是System.Object类的别名。<br>3、对象类型可以分配任何其他类型的值，但在分配值前需要先进行类型转换。<br>4、当一个值类型转换成对象类型时，则为装箱；一个对象类型转换成值类型时，则为拆箱。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Object obj;</span><br><span class="line">obj = 100;// 装箱</span><br></pre></td></tr></table></figure>
+<p><br></p>
+<h3 id="动态类型"><a href="#动态类型" class="headerlink" title="动态类型"></a>动态类型</h3><p>基本语法：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">dynamic &lt;variable_name&gt; = value;</span><br></pre></td></tr></table></figure></p>
+<p>动态类型与对象类型相似，但对象类型变量的类型检查是在编译时发生，而动态类型则在运行时发生。<br><br></p>
+<h3 id="字符串类型"><a href="#字符串类型" class="headerlink" title="字符串类型"></a>字符串类型</h3><p>1、字符串类型是System.String类的别名；<br>2、从对象Objcet类派生；<br>3、可以通过两种形式进行分配：引号和@引号。</p>
+<p>如：<code>String str = &quot;HelloWord&quot;</code><br>一个@引号字符串:<code>String str = @&quot;HelloWord&quot;</code></p>
+<p>在 C# 字符串的前面加@（逐字字符串）将转义字符转换成普通字符：<br><code>String str = @&quot;C:\Windows&quot;</code><br>等价于：<code>String str = &quot;C:\\Windows&quot;</code></p>
+<p>@字符串中可以任意换行，换行符及缩进空格都计算在字符串的长度之内。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">String str = @&quot;&lt;script type = &quot;&quot;text/javascript&quot;&quot;&gt;</span><br><span class="line">&lt;!--</span><br><span class="line">--&gt;</span><br><span class="line">&lt;/script&gt;&quot;;</span><br></pre></td></tr></table></figure></p>
+<p><br></p>
+<h2 id="指针类型"><a href="#指针类型" class="headerlink" title="指针类型"></a>指针类型</h2><p>C# 中的指针与 C 或 C++ 中的指针有相同的功能。<br>声明指针类型：<code>type* identifier</code><br><br><br><br><br><br></p>
+<hr>
+<h1 id="类型转换"><a href="#类型转换" class="headerlink" title="类型转换"></a>类型转换</h1><p>类型转换从根本上说是类型铸造。<br>分两种：<br>1、隐式类型转换：如从低精度类型转换成高精度类型、从派生类转换成基类等；<br>2、显式类型转换：即强制类型转换，和C/C++差不多。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">namespace TypeConvertion&#123;   </span><br><span class="line">  class Class1&#123;</span><br><span class="line"></span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  class Class2 : Class1 //类Class2是类Class1的子类&#123;</span><br><span class="line"></span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  class Program&#123;</span><br><span class="line">    static void Main(string[] args)&#123;</span><br><span class="line">      int inum = 100;</span><br><span class="line">      long lnum = inum; // 进行了隐式转换</span><br><span class="line">      Class1 c1 = new Class2(); // 隐式转换，将一个新建的 Class2 实例转换为了其基类 Class1 类型的实例 C1</span><br><span class="line"></span><br><span class="line">      double dnum = 100.1;</span><br><span class="line">      int ifromd = (int)dnum; // double类型显式转换转为int类型</span><br><span class="line"></span><br><span class="line">      Class1 c11 = new Class1();</span><br><span class="line">      Class2 c22 = c11 as Class2; // 使用as进行显式转换</span><br><span class="line">      Console.WriteLine(c22 is Class1);</span><br><span class="line">      Console.WriteLine(c22 is Class2);</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>上面的运行结果为：</p>
+<blockquote>
+<p>FALSE<br>FALSE</p>
+</blockquote>
+<p>显式转换可能会导致数据出错，或者转换失败，甚至无法编译成功。</p>
+<h2 id="C-类型转换方法"><a href="#C-类型转换方法" class="headerlink" title="C# 类型转换方法"></a>C# 类型转换方法</h2><p>如<code>ToDouble()</code>，把其他类型转换成双精度浮点型:<code>string locstr = 123.ToString()</code><br>而将”locstr”转换成整型，则有以下几种方法：<br>1、Convert<br><code>int i = Convert.ToInt16(locstr)</code><br>2、Parse<br><code>int i = int.Parse(locstr)</code><br>3、<code>int.TryParse(String s,out int i)</code>，最后一个参数result是输出值，如果转换成功则输出相应的值，转换失败则输出0。<br><br><br><br><br><br></p>
+<hr>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/02/01/HPL/" rel="next" title="HPL环境安装与错误集合">
+                <i class="fa fa-chevron-left"></i> HPL环境安装与错误集合
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/03/19/games-development/unity/" rel="prev" title="unity入门">
+                unity入门 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image" src="/images/avatar.gif" alt="嗷小蝶">
+          <p class="site-author-name" itemprop="name">嗷小蝶</p>
+           
+              <p class="site-description motion-element" itemprop="description">雾里看花也不失为一种幸福</p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/">
+                <span class="site-state-item-count">33</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">10</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">1</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+          <div class="feed-link motion-element">
+            <a href="/atom.xml" rel="alternate">
+              <i class="fa fa-rss"></i>
+              RSS
+            </a>
+          </div>
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="http://github.com" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                    
+                      GitHub
+                    
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/u/1852414964/home?wvr=5&lf=reg" target="_blank" title="Weibo">
+                  
+                    <i class="fa fa-fw fa-weibo"></i>
+                  
+                    
+                      Weibo
+                    
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#程序结构"><span class="nav-number">1.</span> <span class="nav-text">程序结构</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Hello-World实例"><span class="nav-number">1.1.</span> <span class="nav-text">Hello World实例</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#基本语法"><span class="nav-number">2.</span> <span class="nav-text">基本语法</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#命名空间"><span class="nav-number">2.1.</span> <span class="nav-text">命名空间</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#using关键字"><span class="nav-number">2.2.</span> <span class="nav-text">using关键字</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Main方法"><span class="nav-number">2.3.</span> <span class="nav-text">Main方法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#class关键字"><span class="nav-number">2.4.</span> <span class="nav-text">class关键字</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#标识符"><span class="nav-number">2.5.</span> <span class="nav-text">标识符</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#C-关键字"><span class="nav-number">2.6.</span> <span class="nav-text">C# 关键字</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#数据结构"><span class="nav-number">3.</span> <span class="nav-text">数据结构</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#值类型"><span class="nav-number">3.1.</span> <span class="nav-text">值类型</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#对象（Object）类型"><span class="nav-number">3.1.1.</span> <span class="nav-text">对象（Object）类型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#动态类型"><span class="nav-number">3.1.2.</span> <span class="nav-text">动态类型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#字符串类型"><span class="nav-number">3.1.3.</span> <span class="nav-text">字符串类型</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#指针类型"><span class="nav-number">3.2.</span> <span class="nav-text">指针类型</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#类型转换"><span class="nav-number">4.</span> <span class="nav-text">类型转换</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#C-类型转换方法"><span class="nav-number">4.1.</span> <span class="nav-text">C# 类型转换方法</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">嗷小蝶</span>
+
+  
+</div>
+
+
+  <!--<div class="powered-by">
+    由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+  </div>
+  -->
+  
+  <div class="powered-by">
+  <i class="fa fa-user-md"></i><span id="busuanzi_container_site_uv">
+    本站访客数:<span id="busuanzi_value_site_uv"></span>
+  </span>
+  </div>
+
+  <span class="post-meta-divider">|</span>
+
+  <div class="theme-info">
+    主题 &mdash;
+    <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+      NexT.Muse
+    </a>
+  </div>
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.2"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.2"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

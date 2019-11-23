@@ -1,0 +1,839 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.2" rel="stylesheet" type="text/css">
+
+
+  <meta name="keywords" content="Hexo, NexT">
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="aoxiaodie" type="application/atom+xml">
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.2">
+
+
+
+
+
+
+<meta name="description" content="四大组件ActivityActivity负责与用户交互。View组件是所有UI组件、容器控件的基类，需要放在容器组件中，或用Activity将其显示。调用setContentView()可以把指定的View显示处理。setContentView()可以接收一个View对象作为参数，也可以接受一个布局管理资源的ID作为参数。 ServiceService通常用于为其他组件提供后台服务或监视其他组件的">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Android">
+<meta property="og:url" content="https://aoxiaodie.github.io/2018/05/24/language/Android/index.html">
+<meta property="og:site_name" content="aoxiaodie">
+<meta property="og:description" content="四大组件ActivityActivity负责与用户交互。View组件是所有UI组件、容器控件的基类，需要放在容器组件中，或用Activity将其显示。调用setContentView()可以把指定的View显示处理。setContentView()可以接收一个View对象作为参数，也可以接受一个布局管理资源的ID作为参数。 ServiceService通常用于为其他组件提供后台服务或监视其他组件的">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2018-11-05T03:21:27.546Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Android">
+<meta name="twitter:description" content="四大组件ActivityActivity负责与用户交互。View组件是所有UI组件、容器控件的基类，需要放在容器组件中，或用Activity将其显示。调用setContentView()可以把指定的View显示处理。setContentView()可以接收一个View对象作为参数，也可以接受一个布局管理资源的ID作为参数。 ServiceService通常用于为其他组件提供后台服务或监视其他组件的">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://aoxiaodie.github.io/2018/05/24/language/Android/">
+
+
+
+
+
+  <title>Android | aoxiaodie</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">aoxiaodie</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">江南烟雨却痴缠</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            主页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-book"></i> <br>
+            
+            文章
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-collocation">
+          <a href="/tags/收藏" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-folder-open"></i> <br>
+            
+            收藏
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://aoxiaodie.github.io/2018/05/24/language/Android/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="嗷小蝶">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="aoxiaodie">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Android</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-05-24T22:30:47+08:00">
+                2018-05-24
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/高级程序语言/" itemprop="url" rel="index">
+                    <span itemprop="name">高级程序语言</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="四大组件"><a href="#四大组件" class="headerlink" title="四大组件"></a>四大组件</h1><h2 id="Activity"><a href="#Activity" class="headerlink" title="Activity"></a>Activity</h2><p><strong>Activity负责与用户交互。</strong><br>View组件是所有UI组件、容器控件的基类，需要放在容器组件中，或用Activity将其显示。<br>调用<code>setContentView()</code>可以把指定的View显示处理。<br><code>setContentView()</code>可以接收一个View对象作为参数，也可以接受一个布局管理资源的ID作为参数。<br><br></p>
+<h2 id="Service"><a href="#Service" class="headerlink" title="Service"></a>Service</h2><p><strong>Service通常用于为其他组件提供后台服务或监视其他组件的运行状态。</strong><br>Service与Activity地位相同，但通常位于后台运行，故此没有图形用户界面。<br>与Activity相似，Service组件需要继承Service基类。<br><br></p>
+<h2 id="BroadcastRecevier"><a href="#BroadcastRecevier" class="headerlink" title="BroadcastRecevier"></a>BroadcastRecevier</h2><p>BroadcastRecevier代表广播消息接收器，类似于事件编程中的监听器，但监听的事件源是Android应用中的其他组件。<br><br></p>
+<h2 id="ContentProvider"><a href="#ContentProvider" class="headerlink" title="ContentProvider"></a>ContentProvider</h2><p>ContentProvider用于跨应用数据交换。<br><br></p>
+<h2 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h2><h3 id="intent和intentFiltet"><a href="#intent和intentFiltet" class="headerlink" title="intent和intentFiltet"></a>intent和intentFiltet</h3><p>intent是不同组件之间通信的载体（Activity、Service、BroadcastRecevier）。</p>
+<p>1.显式intent实现页面跳转<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Intent intent = <span class="keyword">new</span> Intent(FirstActivity.<span class="keyword">this</span>,SecondActivity<span class="class">.<span class="keyword">class</span>)</span>;</span><br><span class="line">startActivity(intent);</span><br></pre></td></tr></table></figure></p>
+<p><br><br>2.<br>在AndroiManifest.xml中：<br><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">&lt;activity</span><br><span class="line">  android:name=<span class="string">".FirstActivity"</span></span><br><span class="line">  android:label=<span class="string">"this is FirstActivity"</span></span><br><span class="line">  android:launchMode=<span class="string">"singleTask"</span>&gt;</span><br><span class="line">  &lt;intent-filter&gt;</span><br><span class="line">    &lt;action android:name=<span class="string">"android.intent.action.MAIN"</span>/&gt;</span><br><span class="line">    &lt;category android:name=<span class="string">"android.intent.category.LAUNCHER"</span>/&gt;</span><br><span class="line">  &lt;/intent-filter&gt;</span><br><span class="line">&lt;/activity&gt;</span><br><span class="line"></span><br><span class="line">&lt;activity android:name=<span class="string">".SecondActivity"</span>&gt;</span><br><span class="line">  &lt;intent-filter&gt;</span><br><span class="line">    &lt;action android:name=<span class="string">"com.example.activitytest.ACTION_START"</span>/&gt;</span><br><span class="line">    &lt;category android:name=<span class="string">"android.intent.category.DEFAULT"</span>/&gt;</span><br><span class="line">  &lt;/intent-filter&gt;</span><br><span class="line">&lt;/activity&gt;</span><br></pre></td></tr></table></figure></p>
+<p>在按钮点击事件中：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Intent intent = <span class="keyword">new</span> Intent(<span class="string">"com.example.activitytest.ACTION_START"</span>);</span><br><span class="line">startActivity(intent);</span><br></pre></td></tr></table></figure></p>
+<p>3.<code>putExtra()</code>向下一个活动传递数据<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">String data = <span class="string">"Hello"</span>;</span><br><span class="line">Intent intent = <span class="keyword">new</span> Intent(FirstActivity.<span class="keyword">this</span>,SecondActivity<span class="class">.<span class="keyword">class</span>)</span>;</span><br><span class="line">intent.putExtra(<span class="string">"Data"</span>,data);</span><br><span class="line">startActivity(intent);</span><br></pre></td></tr></table></figure></p>
+<p>接收：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Intent intent = getIntent();</span><br><span class="line">String date = intent.getStringExtra(<span class="string">"Data"</span>);</span><br></pre></td></tr></table></figure></p>
+<p><br><br><br></p>
+<h2 id><a href="#" class="headerlink" title></a><br></h2><h1 id="界面编程"><a href="#界面编程" class="headerlink" title="界面编程"></a>界面编程</h1><h2 id="9Patch"><a href="#9Patch" class="headerlink" title="9Patch"></a>9Patch</h2><p>启动Android SDK/tools/draw9patch.bat即可制作。</p>
+<h2 id="Toast显示提示信息框"><a href="#Toast显示提示信息框" class="headerlink" title="Toast显示提示信息框"></a>Toast显示提示信息框</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Toast.makeText(context,<span class="string">"Text"</span>,Toast.LENGTH_SHORT).show();</span><br></pre></td></tr></table></figure>
+<p>1.用静态方法<code>makeText()</code>创建一个Toast对象；<br>2.三个参数，第一个是上下文Context，第二个是Toast要显示的文本内容，第三个是显示的时长，有LENGTH_SHORT和LENGTH_LONG两种；<br>3.调用<code>show()</code>显示。<br><br></p>
+<h2 id="对话框"><a href="#对话框" class="headerlink" title="对话框"></a>对话框</h2><h3 id="AlertDialog"><a href="#AlertDialog" class="headerlink" title="AlertDialog"></a>AlertDialog</h3><p>显示提示消息的对话框<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">AlertDialog.Builder builder = <span class="keyword">new</span> AlertDialog.Builder(<span class="keyword">this</span>)</span><br><span class="line">.setTitle(<span class="string">"简单对话框"</span>)</span><br><span class="line">.setIcon(R.drawble.tools)</span><br><span class="line">.setMessage(<span class="string">"测试内容"</span>);</span><br><span class="line">setPositiveButton(builder); <span class="comment">// 添加确定按钮</span></span><br><span class="line">setNegativeButton(builder) <span class="comment">// 添加取消按钮</span></span><br><span class="line">.create() <span class="comment">// 创建对象</span></span><br><span class="line">.show(); <span class="comment">// 显示</span></span><br></pre></td></tr></table></figure></p>
+<p><br></p>
+<h2 id="Menu"><a href="#Menu" class="headerlink" title="Menu"></a>Menu</h2><p>在res目录下新建一个menu文件夹（Directory），再其中新建一个main菜单文件。<br>1.在main.xml文件中创建两个菜单项：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&lt;item</span><br><span class="line">  android:id=<span class="string">"@id/add_item"</span></span><br><span class="line">  android:title=<span class="string">"Add"</span>/&gt;</span><br><span class="line">&lt;item</span><br><span class="line">android:id=<span class="string">"@id/remove_item"</span></span><br><span class="line">android:title=<span class="string">"Remove"</span>/&gt;</span><br></pre></td></tr></table></figure></p>
+<p><br><br>2.在主活动中重写方法<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">onCreateOptionMenu</span><span class="params">(Menu menu)</span></span>&#123;</span><br><span class="line">  getMenuInflater().inflate(R.menu.main,menu);</span><br><span class="line">  <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p><code>inflate()</code>方法接收两个参数，第一个用于指定资源文件，第二个用于指定菜单项将添加到那个Menu对象中。<br><br><br>3.重写方法定义菜单点击事件<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">onOptionsItemSelected</span><span class="params">(MenuItem item)</span></span>&#123;</span><br><span class="line">  <span class="keyword">switch</span> (item.getItemId())&#123;</span><br><span class="line">    <span class="keyword">case</span> R.id.add_item:</span><br><span class="line">    Toast.makeText(<span class="keyword">this</span>,<span class="string">"you clicked add"</span>,Toast.LENGTH_SHORT).show();</span><br><span class="line">    <span class="keyword">break</span>;</span><br><span class="line">    <span class="keyword">case</span> R.id.remove_item:</span><br><span class="line">    Toast.makeText(<span class="keyword">this</span>,<span class="string">"you clicked remove"</span>,Toast.LENGTH_SHORT).show();</span><br><span class="line">    <span class="keyword">break</span>;</span><br><span class="line">    <span class="keyword">default</span>:<span class="keyword">break</span>;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p><br><br><br></p>
+<h2 id="-1"><a href="#-1" class="headerlink" title></a><br></h2><h1 id="图形与图像处理"><a href="#图形与图像处理" class="headerlink" title="图形与图像处理"></a>图形与图像处理</h1><h2 id="Bitmap和Drawable"><a href="#Bitmap和Drawable" class="headerlink" title="Bitmap和Drawable"></a>Bitmap和Drawable</h2><p>Bitmap——位图，文件格式后缀为.bmp，可理解为一种存储对象。<br>Drawable——一种可以在Canvas上进行绘制的抽象的概念。<br><code>R.drawble.file_name</code>是一个int类型的常量，只代表Drawable对象的ID。</p>
+<p>获取资源文件下的图片：<br><code>Bitmap bitmap = BitmapFactory.decodeResource(getResources(),R.drawble.file_name)</code></p>
+<p>1.<code>createBitmap()</code>创建新的位图<br>2.<code>createScaledBitmap()</code>缩放位图<br><br></p>
+<h2 id="绘图"><a href="#绘图" class="headerlink" title="绘图"></a>绘图</h2><p>重写<code>onDraw(Canvas canvas)</code>方法进行绘制。<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Override</span></span><br><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">onDraw</span><span class="params">(Canvas canvas)</span></span>&#123;</span><br><span class="line">  Paint paint = <span class="keyword">new</span> Paint(); <span class="comment">// 定义并设置画笔</span></span><br><span class="line">  paint.setColor(Color.BLACK)</span><br><span class="line">  RectF rect = <span class="keyword">new</span> RectF(<span class="number">10</span>,<span class="number">10</span>,width-<span class="number">10</span>,height/<span class="number">3</span>-<span class="number">10</span>); <span class="comment">// 构建一个三角形，前两个参数是左上角坐标，后两个参数是右下角坐标</span></span><br><span class="line">  canvas.drawRect(rect,paint)</span><br><span class="line">  canvas.drawColor(Color.WHITE);</span><br><span class="line">  canvas.drawBitmap(bitmap,x,y,<span class="keyword">null</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p><br></p>
+<h2 id="双缓冲技术"><a href="#双缓冲技术" class="headerlink" title="双缓冲技术"></a>双缓冲技术</h2><p>原理：不直接绘制到View上，而是先绘制到内存中的一个Bitmap上，当内存图片绘制后，再一次性将Bitmap绘制到View组件上。<br><br></p>
+<h2 id="AnimationDrawable逐帧动画"><a href="#AnimationDrawable逐帧动画" class="headerlink" title="AnimationDrawable逐帧动画"></a>AnimationDrawable逐帧动画</h2><p>1.（1）.在res/anim目录下创建动画文件anims.xml：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&lt;?xml version=<span class="string">"1.0"</span> encoding=<span class="string">"utf-8"</span>&gt;</span><br><span class="line">&lt;animation-list</span><br><span class="line">  xmlns:android=<span class="string">"http://schemas.android.com/apk/res/android"</span></span><br><span class="line">  android:oneshot=<span class="string">"false"</span> <span class="comment">// 循环播放</span></span><br><span class="line">  &lt;item android:drawable=<span class="string">"@mipmap/anim01"</span> android:duration=<span class="string">"80"</span> /&gt;</span><br><span class="line">  ...</span><br></pre></td></tr></table></figure></p>
+<p><br><br>（2）.设置动画到组件中：<br>布局管理<code>&lt;ImageView android:id=&quot;@id/animView&quot; android:src=&quot;@anim/anims&quot; /&gt;</code><br>调用：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">imageView = (ImageView)findViewById(R.id.animView);</span><br><span class="line">AnimationDrawable anim = (AnimationDrawable)imageView.getDrawable();</span><br><span class="line">...</span><br><span class="line">anim.start(); <span class="comment">// 开始动画</span></span><br><span class="line">anim.stop(); <span class="comment">// 结束动画</span></span><br></pre></td></tr></table></figure></p>
+<p><br><br>2.动态加载帧图片实现帧动画<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">AnimationDrawable anims = <span class="keyword">new</span> AnimationDrawable();</span><br><span class="line">TypedArray typedArray = getResources().obtainTypedArray(R.array.images);</span><br><span class="line"><span class="keyword">int</span>[] resourceImages = <span class="keyword">new</span> <span class="keyword">int</span>[typedArray.length()];</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>;i &lt; resourceImages.length;i++ ) &#123;</span><br><span class="line">  resourceImages = typedArray.getResourceId(i,<span class="number">0</span>);</span><br><span class="line">&#125;</span><br><span class="line">typedArray.recycle();</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>;i &lt; resourceImages.length;i++ ) &#123;</span><br><span class="line">  anims.addFrame(getResources().getDrawable(resourceImages[i],<span class="keyword">null</span>),speed);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">imageView.getBackground(anims);</span><br></pre></td></tr></table></figure></p>
+<p><br><br>补充：读取array.xml中的drawable数组资源<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">TypedArray typedArray = getResources().obtainTypedArray(R.array.images);</span><br><span class="line"><span class="keyword">int</span>[] resourceImages = <span class="keyword">new</span> <span class="keyword">int</span>[typedArray.length()];</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>;i &lt; resourceImages.length;i++ ) &#123;</span><br><span class="line">  resourceImages = typedArray.getResourceId(i,<span class="number">0</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>读取array.xml中的String数组资源<br><code>imageNames = getResources().getStringArray(R.array.Names)</code><br><br></p>
+<h2 id="SurfaceView"><a href="#SurfaceView" class="headerlink" title="SurfaceView"></a>SurfaceView</h2><p>流程：</p>
+<blockquote>
+<p>1：创建一个Bitmap对象；<br>2：创建一个Canvas对象关联创建的Bitmap对象；<br>3：在Canvas上进行绘制；<br>4：锁定Canvas画布；<br>5：将Bitmap内容绘制到backBuffer中去；<br>6：解锁Canvas画布。</p>
+</blockquote>
+<p>1.创建自定义的SurfaceView，需要继承SurfaceView并实现SufaceHolder.Callback和Runnable两个接口：<br><code>public class MySurfaceView extends SurfaceView implements SurfaceHolder.Callback,Runnable</code></p>
+<p>对于SurfaceHolder.Callback方法，需要实现如下方法：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Override</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">surfaceCreated</span><span class="params">(SurfaceHolder holder)</span> </span>&#123; <span class="comment">//当创建时调用</span></span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"><span class="meta">@Override</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">surfaceChanged</span><span class="params">(SurfaceHolder holder, <span class="keyword">int</span> format, <span class="keyword">int</span> width, <span class="keyword">int</span> height)</span> </span>&#123; <span class="comment">//当改变时调用</span></span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="meta">@Override</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">surfaceDestroyed</span><span class="params">(SurfaceHolder holder)</span> </span>&#123; <span class="comment">//当销毁时调用</span></span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>对于Runnable接口：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Override</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span></span>&#123;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p><br><br>2.初始化<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">private</span> SurfaceHolder holder;</span><br><span class="line"><span class="keyword">private</span> Canvas canvas;</span><br><span class="line"><span class="keyword">private</span> <span class="keyword">boolean</span> isDrawing; <span class="comment">// 控制绘画线程的标志</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="title">MySurfaceView</span><span class="params">(Context context, AttributeSet attrs)</span> </span>&#123;</span><br><span class="line">  <span class="keyword">super</span>(context, attrs);</span><br><span class="line">  holder = getHolder(); <span class="comment">// 获取SurfaceHolder对象</span></span><br><span class="line">  holder.addCallback(<span class="keyword">this</span>); <span class="comment">// 注册SurfaceHolder的回调方法</span></span><br><span class="line">  isDrawing = <span class="keyword">false</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p><br><br>3.绘制<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Override</span></span><br><span class="line"><span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">onDraw</span><span class="params">(Canvas canvas)</span></span>&#123;</span><br><span class="line">  <span class="keyword">super</span>.onDraw(canvas);</span><br><span class="line">  <span class="keyword">if</span> (canvas == <span class="keyword">null</span>) &#123; <span class="comment">// 锁定画布</span></span><br><span class="line">    canvas = holder.lockCanvas();</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="comment">// 绘制</span></span><br><span class="line">  <span class="keyword">if</span> (canvas != <span class="keyword">null</span>) &#123; <span class="comment">// 释放</span></span><br><span class="line">    holder.unlockCanvasAndPost(canvas);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p><br><br><br></p>
+<h2 id="-2"><a href="#-2" class="headerlink" title></a><br></h2><h1 id="线程"><a href="#线程" class="headerlink" title="线程"></a>线程</h1><h2 id="线程的基本用法"><a href="#线程的基本用法" class="headerlink" title="线程的基本用法"></a>线程的基本用法</h2><p>1.继承Thread<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">MyThread</span> <span class="keyword">extends</span> <span class="title">Thread</span></span>&#123;</span><br><span class="line">  <span class="meta">@Override</span></span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span></span>&#123;</span><br><span class="line"></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>启动：<code>new MyThrea().start()</code><br><br><br>2.实现Runnable接口<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">MyThread</span> <span class="keyword">implements</span> <span class="title">Runnable</span></span>&#123;</span><br><span class="line">  <span class="meta">@Override</span></span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span></span>&#123;</span><br><span class="line"></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>启动：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">MyThread myThread = <span class="keyword">new</span> MyThread();</span><br><span class="line"><span class="keyword">new</span> Thread(myThread).start();</span><br></pre></td></tr></table></figure></p>
+<p><br><br>3.匿名类<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">new</span> Thread()&#123;</span><br><span class="line">  <span class="meta">@Override</span></span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span></span>&#123;</span><br><span class="line"></span><br><span class="line">  &#125;</span><br><span class="line">&#125;.start();</span><br></pre></td></tr></table></figure></p>
+<p><br></p>
+<h2 id="Handler消息传递机制"><a href="#Handler消息传递机制" class="headerlink" title="Handler消息传递机制"></a>Handler消息传递机制</h2><p>Android不允许子线程更新UI操作，所以使用Handler消息传递机制：</p>
+<blockquote>
+<p>Looper类：负责管理线程的消息队列和消息循环<br>Handler类：发送和处理消息<br>Message类：线程间通讯的消息载体</p>
+</blockquote>
+<p><br><br>1.普通线程<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">private</span> Handler handler = <span class="keyword">new</span> Handler() &#123;</span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">handlerMessage</span><span class="params">(Message message)</span></span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (message.what == <span class="number">0x123</span>) &#123;</span><br><span class="line">      text.setText(message.obj);</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line">...</span><br><span class="line"></span><br><span class="line"><span class="keyword">new</span> Thread()&#123;</span><br><span class="line">  <span class="meta">@Override</span></span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span></span>&#123;</span><br><span class="line">    Message message = <span class="keyword">new</span> Message();</span><br><span class="line">    message.obj = <span class="string">"Hello"</span>;</span><br><span class="line">    message.what = <span class="number">0x123</span>;</span><br><span class="line">    handler.sendMessage(message);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;.start();</span><br></pre></td></tr></table></figure></p>
+<p><br><br>2.循环线程<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">new</span> Thread()&#123;</span><br><span class="line">  Looper.prepare();</span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span></span>&#123;</span><br><span class="line">    handler.sendEmptyMessage(<span class="number">0x123</span>); <span class="comment">// 发送空消息</span></span><br><span class="line">  &#125;</span><br><span class="line">  Looper.loop();</span><br><span class="line">&#125;.start();</span><br></pre></td></tr></table></figure></p>
+<h2 id="使用AsyncTask"><a href="#使用AsyncTask" class="headerlink" title="使用AsyncTask"></a>使用AsyncTask</h2><p>1.AsyncTast&lt;Params,Progress,Result&gt;<br>（1）Params：启动任务执行的输入参数的类型<br>（2）Progress：后台任务完成的进度值的类型<br>（3）Result：后台执行任务完成后返回结果的类型</p>
+<p>2.必须在UI线程中创建AsyncTast的实例；<br>必须在UI线程调用AsyncTast的<code>execute()</code>方法。</p>
+<p>一个例子<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">MyTast</span> <span class="keyword">extends</span> <span class="title">AsyncTast</span>&lt;<span class="title">Integer</span>,<span class="title">Integer</span>,<span class="title">String</span>&gt;</span>&#123;</span><br><span class="line">  <span class="meta">@Override</span></span><br><span class="line">  <span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">onPreExecute</span><span class="params">()</span></span>&#123; <span class="comment">// 用于一些准备工作，如在界面显示进度条</span></span><br><span class="line">    <span class="keyword">super</span>.onPreExecute();</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="meta">@Override</span></span><br><span class="line">  <span class="function"><span class="keyword">protected</span> String <span class="title">doInBackground</span><span class="params">(Integer...params)</span></span>&#123; <span class="comment">// 后台线程将要完成的任务</span></span><br><span class="line">      publishProgress(Progress...values); <span class="comment">// 更新任务的执行进度</span></span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="meta">@Override</span></span><br><span class="line">  <span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">onProgressUpdate</span><span class="params">(Integer...values)</span></span>&#123; <span class="comment">// 更新进度，doInBackground()中的publishProgress()执行后触发</span></span><br><span class="line">    <span class="keyword">super</span>.onProgressUpdate(values);</span><br><span class="line"></span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="meta">@Override</span></span><br><span class="line">  <span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">onPostExecute</span><span class="params">(String s)</span></span>&#123; <span class="comment">//后台任务执行成后显示的内容</span></span><br><span class="line">    <span class="keyword">super</span>.onPostExecute(s);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p><br></p>
+<h2 id="服务"><a href="#服务" class="headerlink" title="服务"></a>服务</h2><h3 id="创建一个服务："><a href="#创建一个服务：" class="headerlink" title="创建一个服务："></a>创建一个服务：</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> MyService extends Service&#123;</span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="title">MyService</span><span class="params">()</span></span>&#123;</span><br><span class="line"></span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="meta">@Override</span></span><br><span class="line">  <span class="function"><span class="keyword">public</span> IBinder <span class="title">onBind</span><span class="params">(Intent intent)</span></span>&#123;</span><br><span class="line"></span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="meta">@Override</span></span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onCreate</span><span class="params">()</span></span>&#123; <span class="comment">// 创建时调用</span></span><br><span class="line">    <span class="keyword">super</span>.onCreate();</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="meta">@Override</span></span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">onStartCommand</span><span class="params">(Intent intent,<span class="keyword">int</span> flags,<span class="keyword">int</span> startId)</span></span>&#123; <span class="comment">// 启动时调用</span></span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">super</span>.onStartCommand(intent,flags,startId);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="meta">@Override</span></span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onDestory</span><span class="params">()</span></span>&#123; <span class="comment">// 销毁时调用</span></span><br><span class="line">    <span class="keyword">super</span>.onDestory();</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>并在AndroidManifest.xml中注册。<br><br></p>
+<h3 id="启动和停止服务"><a href="#启动和停止服务" class="headerlink" title="启动和停止服务"></a>启动和停止服务</h3><p>启动：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Intent intent = <span class="keyword">new</span> Intent(<span class="keyword">this</span>,MyService<span class="class">.<span class="keyword">class</span>)</span>;</span><br><span class="line">startService(intent);</span><br></pre></td></tr></table></figure></p>
+<p>停止：<code>stopService(intent)</code></p>
+<p>另外，在MyService的任何一个位置调用<code>stopSelf()</code>方法即可停止服务。<br><br></p>
+<h3 id="活动和服务的通信"><a href="#活动和服务的通信" class="headerlink" title="活动和服务的通信"></a>活动和服务的通信</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">ServiceConnection conn = <span class="keyword">new</span> ServiceConnection()&#123;</span><br><span class="line"></span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">bindService(intent,conn,BIND_AUTO_CREATE); <span class="comment">// 绑定服务</span></span><br><span class="line">unbindService(conn); <span class="comment">// 解绑服务</span></span><br></pre></td></tr></table></figure>
+<p><br><br><br></p>
+<h2 id="-3"><a href="#-3" class="headerlink" title></a><br></h2><h1 id="多媒体"><a href="#多媒体" class="headerlink" title="多媒体"></a>多媒体</h1><h2 id="MediaPlayer播放音乐"><a href="#MediaPlayer播放音乐" class="headerlink" title="MediaPlayer播放音乐"></a>MediaPlayer播放音乐</h2><p>1.<code>MediaPlayer mediaPlayer</code><br>2.<code>mediaPlayer = MediaPlayer.create(this,R.raw.music)</code><br>3.<code>mediaPlayer.start()</code>、<code>mediaPlayer.stop()</code>、<code>mediaPlayer.pasue()</code><br>获取音频长度：<code>mediaPlayer.getDuration</code><br><br><br><br></p>
+<h2 id="-4"><a href="#-4" class="headerlink" title></a><br></h2><h1 id="ListView和RecycleView"><a href="#ListView和RecycleView" class="headerlink" title="ListView和RecycleView"></a>ListView和RecycleView</h1><h2 id="ListView"><a href="#ListView" class="headerlink" title="ListView"></a>ListView</h2><p>生成列表视图的方式：<br>（1）直接使用ListView创建；<br>（2）让Activity继承ListActivity。<br>获得ListView后，设置要显示的列表项，可以通过setAdapter()方法为其提供Adapter，并由Adapter提供列表项。</p>
+<p>总得来说：<br>AdapterView是抽象基类；<br>ListView是容器，继承自AbsListView，负责显示列表项（AbsListView继承自AdapterView）；<br>Adapter是接口，几个常见的接口实现类：ArrayAdapter、SimpleAdapter、BaseAdapter等，也可以自定义。<br>Adapter提供每个列表项的组件。</p>
+<p>1.list.xml：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&lt;ListView android:id=<span class="string">"@+id/List"</span></span><br><span class="line">          android:layout_width=<span class="string">"match_parent"</span> android:layout_height=<span class="string">"0dp"</span> android:layout_weight=<span class="string">"1"</span>/&gt;</span><br></pre></td></tr></table></figure></p>
+<p><br><br>2.list_item.xml：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&lt;ImageView android:id=<span class="string">"@+id/Image"</span></span><br><span class="line">           android:layout_width=<span class="string">"100dp"</span> android:layout_height=<span class="string">"100dp"</span>/&gt;</span><br><span class="line">&lt;TextView android:id=<span class="string">"@+id/Text"</span> android:layout_gravity=<span class="string">"center"</span></span><br><span class="line">          android:layout_width=<span class="string">"match_parent"</span> android:layout_height=<span class="string">"wrap_content"</span>/&gt;</span><br></pre></td></tr></table></figure></p>
+<p><br><br>3.List.java：略<br><br><br>4.ListAdapter.java：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ListAdapter</span> <span class="keyword">extends</span> <span class="title">ArrayAdapter</span>&lt;<span class="title">List</span>&gt; </span>&#123;</span><br><span class="line">  <span class="keyword">private</span> <span class="keyword">int</span> resourceId;</span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="title">ListAdapter</span><span class="params">(Context context,<span class="keyword">int</span> textViewRecourceId,List&lt;List&gt; objects)</span></span>&#123;</span><br><span class="line">    <span class="keyword">super</span>(context,textViewResourceId,objects);</span><br><span class="line">        resourceId = textViewResourceId;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="meta">@Override</span></span><br><span class="line">  <span class="function"><span class="keyword">public</span> View <span class="title">getView</span><span class="params">(<span class="keyword">int</span> position,View converView,ViewGroup parent)</span></span>&#123;</span><br><span class="line">    List list = getItem(position); <span class="comment">// 获取当前项的实例</span></span><br><span class="line">    View view = LayoutInflater.from(getContext()).inflate(resourceId,parent,<span class="keyword">false</span>); <span class="comment">// LayoutInflater将子项传入布局</span></span><br><span class="line">    ImageView Image = (ImageView) view.findViewById(R.id.Image);</span><br><span class="line">    TextView Text = (TextView) view.findViewById(R.id.Text);</span><br><span class="line">    bkgImage.setImageResource(background.getImage());</span><br><span class="line">    bkgText.setText(background.getListText());</span><br><span class="line">    <span class="keyword">return</span> view;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p><br><br>5.MainActivity.java或其它：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">private</span> List&lt;List&gt; list = <span class="keyword">new</span> ArrayAdapter&lt;&gt;();</span><br><span class="line"></span><br><span class="line"><span class="meta">@Override</span></span><br><span class="line"><span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">onCreate</span><span class="params">(Bundle savadInstanceState)</span></span>&#123;</span><br><span class="line">  ...</span><br><span class="line">  initList();</span><br><span class="line">  ListAdapter adapter = <span class="keyword">new</span> ListAdapter(MainActivity.<span class="keyword">this</span>,R.layout.list_item,list);</span><br><span class="line">  ListView listview = (ListView)findViewById(R.id.List);</span><br><span class="line">  listview.setAdapter(adapter);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">initList</span><span class="params">()</span></span>&#123;</span><br><span class="line">  List list_item = <span class="keyword">new</span> List(<span class="string">"ex1"</span>,R.drawble.ex1);</span><br><span class="line">  list.add(list_item);</span><br><span class="line">  ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>6.ListView的点击事件：<br>在onCreate()方法中<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">listview.setOnItemClickListener(<span class="keyword">new</span> AdapterView.OnItemClickListener()&#123;</span><br><span class="line">  <span class="meta">@Override</span></span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">OnItemClick</span><span class="params">(AdapterView&lt;?&gt; parent,View view,<span class="keyword">int</span> position,<span class="keyword">long</span> id)</span></span>&#123;</span><br><span class="line">    List list_item = list.get(position);</span><br><span class="line">    ...</span><br><span class="line">  &#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure></p>
+<p><br><br><br><br><br></p>
+<h2 id="RecycleView"><a href="#RecycleView" class="headerlink" title="RecycleView"></a>RecycleView</h2><p>1.web.xml中添加依赖：<br><code>compile &#39;com.android.support:recycleView-v7:24.2.1&#39;</code><br><br><br>2.recycle.xml：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&lt;android.support.v7.widget.RecyclerView</span><br><span class="line">            android:id=<span class="string">"@+id/recycler_view"</span></span><br><span class="line">            android:layout_width=<span class="string">"match_parent"</span></span><br><span class="line">            android:layout_height=<span class="string">"0dp"</span> android:layout_weight=<span class="string">"1"</span>/&gt;</span><br></pre></td></tr></table></figure></p>
+<p><br><br>2.recycle_item.xml：略<br><br><br>3.Recycle.java：略<br><br><br>4.RecycleAdapter.java：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">PortraitAdapter</span> <span class="keyword">extends</span> <span class="title">RecyclerView</span>.<span class="title">Adapter</span>&lt;<span class="title">PortraitAdapter</span>.<span class="title">ViewHolder</span>&gt;</span>&#123;</span><br><span class="line">    <span class="keyword">private</span> List&lt;Recycle&gt; mrecycle;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">static</span> <span class="class"><span class="keyword">class</span> <span class="title">ViewHolder</span> <span class="keyword">extends</span> <span class="title">RecyclerView</span>.<span class="title">ViewHolder</span> </span>&#123;</span><br><span class="line">        ImageView Image;</span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="title">ViewHolder</span><span class="params">(View view)</span></span>&#123;</span><br><span class="line">            <span class="keyword">super</span>(view);</span><br><span class="line">            Image = (ImageView) view.findViewById(R.id.Image);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">PortraitAdapter</span><span class="params">(List&lt;Portrait&gt; recycle)</span></span>&#123;</span><br><span class="line">        mrecycle = recycle;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> ViewHolder <span class="title">onCreateViewHolder</span><span class="params">(ViewGroup parent,<span class="keyword">int</span> viewType)</span></span>&#123;</span><br><span class="line">        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.recycle_item,parent,<span class="keyword">false</span>);</span><br><span class="line">        ViewHolder holder = <span class="keyword">new</span> ViewHolder(view);</span><br><span class="line">        <span class="keyword">return</span> holder;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onBindViewHolder</span><span class="params">(ViewHolder holder,<span class="keyword">int</span> position)</span></span>&#123;</span><br><span class="line">        Recycle recycle = mrecycle.get(position);</span><br><span class="line">        holder.tImage.setImageResource(portrait.getImage());</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">getItemCount</span><span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="keyword">return</span> mPortrait.size();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p><br><br>5.MainActivity.java或其它：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">private</span> List&lt;Recycle&gt; recycleList = <span class="keyword">new</span> ArrayAdapter&lt;&gt;();</span><br><span class="line">  ...</span><br><span class="line">  initRecycle();</span><br><span class="line">  RecycleView recycleView = (RecycleView)findViewById(R.id.recycler_view);</span><br><span class="line">  LinearLayoutManger layoutManage = <span class="keyword">new</span> LinearLayoutManger(<span class="keyword">this</span>); <span class="comment">// 线性排列</span></span><br><span class="line">  recycleView.setLayoutManager(layoutManage);</span><br><span class="line">  RecycleAdapter adapter = <span class="keyword">new</span> RecycleAdapter(recycleList);</span><br><span class="line">  recycleView.setAdapter(adapter);</span><br><span class="line">  ...</span><br></pre></td></tr></table></figure></p>
+<p><br><br>6.RecycleView的点击事件：</p>
+<p><br><br><br></p>
+<h2 id="-5"><a href="#-5" class="headerlink" title></a><br></h2><h1 id="广播机制"><a href="#广播机制" class="headerlink" title="广播机制"></a>广播机制</h1><h2 id="类型"><a href="#类型" class="headerlink" title="类型"></a>类型</h2><p>1.标准广播：完全异步执行的广播，发送后所有的广播接收器几乎都会在同一时刻接收到。<br>2.有序广播：同步执行的广播。<br><br></p>
+<h2 id="接收系统广播"><a href="#接收系统广播" class="headerlink" title="接收系统广播"></a>接收系统广播</h2><h3 id="动态注册监听网络变化"><a href="#动态注册监听网络变化" class="headerlink" title="动态注册监听网络变化"></a>动态注册监听网络变化</h3><p>创建广播接收器：新建一个类，继承BroadcastReciver，并重写父类的<code>onReciver()</code>方法即可。<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MainActivity</span> <span class="keyword">extends</span> <span class="title">AppCompatActivity</span></span>&#123;</span><br><span class="line">  <span class="keyword">private</span> IntentFilter intentFilter;</span><br><span class="line">  <span class="keyword">private</span> NetworkChangeReceiver networkChangeReceiver;</span><br><span class="line"></span><br><span class="line">  <span class="meta">@Override</span></span><br><span class="line">  <span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">onCreate</span><span class="params">(Bundle savedInstanceState)</span></span>&#123;</span><br><span class="line">    <span class="keyword">super</span>.onCreate(savedInstanceState);</span><br><span class="line">    setContentView(R.layout.activity_main);</span><br><span class="line"></span><br><span class="line">    intentFilter = <span class="keyword">new</span> IntentFilter();</span><br><span class="line">    <span class="comment">// 广播接收器想要监听什么广播，就在这里添加相应的action</span></span><br><span class="line">    intentFilter.addAction(<span class="string">"android.net.conn.CONNECTIVITY_CHANGE"</span>);</span><br><span class="line">    networkChangeReceiver = <span class="keyword">new</span> NetworkChangeReceiver();</span><br><span class="line">    registerRecevier(networkChangeReceiver,intentFilter);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="meta">@Override</span></span><br><span class="line">  <span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">onDestory</span><span class="params">()</span></span>&#123; <span class="comment">// 动态注册的广播接收器一定要取消注册</span></span><br><span class="line">    <span class="keyword">super</span>.onDestroy();</span><br><span class="line">    unregisterRecevier(networkChangeReceiver);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="class"><span class="keyword">class</span> <span class="title">NetworkChangeReceiver</span> <span class="keyword">extends</span> <span class="title">BroadcastReceiver</span></span>&#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onReciver</span><span class="params">(Context context,Intent intent)</span></span>&#123;</span><br><span class="line">      Toast.makeText(context,<span class="string">"network change"</span>,Toast.LENGHT_SHORT).show();</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p><br></p>
+<h3 id="静态注册实现开机启动"><a href="#静态注册实现开机启动" class="headerlink" title="静态注册实现开机启动"></a>静态注册实现开机启动</h3><p>实现在程序未启动的情况下接收广播。<br>静态广播接收器一定要在AndroidManifest.xml文件中注册才可以使用。</p>
+<p>由于系统启动完成后会发出一条值为<code>android.intent.action.BOOT_COMPLETED</code>的广播，所以要添加相应的action：<br><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&lt;receiver</span><br><span class="line">  .../&gt;</span><br><span class="line">  &lt;intent-filter&gt;</span><br><span class="line">    &lt;action android:name=<span class="string">"android.intent.action.BOOT_COMPLETED"</span>&gt;</span><br><span class="line">  &lt;/intent-filter&gt;</span><br><span class="line">&lt;/receiver&gt;</span><br></pre></td></tr></table></figure></p>
+<p>即让广播接收器监听这条广播。<br><br></p>
+<h2 id="发送自定义广播"><a href="#发送自定义广播" class="headerlink" title="发送自定义广播"></a>发送自定义广播</h2><h3 id="发送标准广播"><a href="#发送标准广播" class="headerlink" title="发送标准广播"></a>发送标准广播</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Intent intent = <span class="keyword">new</span> Intent(<span class="string">"com.example.broadcasttest.MY_BROADCAST"</span>);</span><br><span class="line">sendBroadcast(intent);</span><br></pre></td></tr></table></figure>
+<p>创建一个自定义广播，修改AndroidManifest.xml：<br><code>&lt;action android:name=&quot;com.example.broadcasttest.MY_BROADCAST&quot;&gt;</code><br>即可接收消息。</p>
+<h3 id="发送有序广播"><a href="#发送有序广播" class="headerlink" title="发送有序广播"></a>发送有序广播</h3><p>修改：<code>sendOrderBroadcast(intent,null)</code></p>
+<p>可以设置广播接收器的优先级：<br><code>&lt;intent-filter android:priority=&quot;100&quot;&gt;</code><br><br><br><br></p>
+<h2 id="-6"><a href="#-6" class="headerlink" title></a><br></h2><h1 id="SQLite数据库"><a href="#SQLite数据库" class="headerlink" title="SQLite数据库"></a>SQLite数据库</h1><h2 id="建库"><a href="#建库" class="headerlink" title="建库"></a>建库</h2><p>1.<br>例子：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MyDatabaseHelper</span> <span class="keyword">extends</span> <span class="title">SQLiteOpenHelper</span></span>&#123;</span><br><span class="line">  <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> String CREATE_BOOK = <span class="string">"create table Bool("</span>+<span class="string">" id integer primary key autoincrement,"</span>+<span class="string">" author text)"</span>;</span><br><span class="line">  <span class="keyword">private</span> Context context;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// 第一个参数——上下文，第二个参数——数据库名，第三个参数——一般为null，第四个参数——当前数据库版本号</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">MyDatabaseHelper</span><span class="params">(Context context,String name,SQLiteDatabase.CursorFactory factory,<span class="keyword">int</span> version)</span></span>&#123;</span><br><span class="line">    <span class="keyword">super</span>(context,name,factory,version);</span><br><span class="line">    <span class="keyword">this</span>.context = context;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="meta">@Override</span></span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onCreate</span><span class="params">(SQLiteDatabase db)</span></span>&#123;</span><br><span class="line">    db.execSQL(CREATE_BOOK);</span><br><span class="line">    Toast.makeText(context,<span class="string">"Create succeeded"</span>,Toast.LENGHT_SHORT).show();</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="meta">@Override</span></span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onUpgrade</span><span class="params">(SQLiteDatabase db,<span class="keyword">int</span> oldVersion,<span class="keyword">int</span> newVersion)</span></span>&#123;</span><br><span class="line">    <span class="comment">// 用于升级数据库</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>创建SQLiteOpenHelper实例，调用其实例方法<code>getReadableDatabase()</code>或<code>getWriteDatabase()</code>来创建或打开一个现有的数据库。<br>如：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">MyDatabaseHelper dbHelper = <span class="keyword">new</span> MyDatabaseHelper(<span class="keyword">this</span>,<span class="string">"BookStore.db"</span>,<span class="keyword">null</span>,<span class="number">1</span>);</span><br><span class="line">dbHelper.getWriteDatabase();</span><br></pre></td></tr></table></figure></p>
+<p><br><br>2.插入一个新的表<br>修改<code>onCreate()</code>方法，多加一条：<code>db.execSQL(CREATE_CATEGORY)</code><br>修改<code>onUpgrade()</code>方法：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Override</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onUpgrade</span><span class="params">(SQLiteDatabase db,<span class="keyword">int</span> oldVersion,<span class="keyword">int</span> newVersion)</span></span>&#123;</span><br><span class="line">  db.execSQL(<span class="string">"drop table if exits Book"</span>);</span><br><span class="line">  db.execSQL(<span class="string">"drop table if exits Category"</span>);</span><br><span class="line">  onCreate(db);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p><br></p>
+<h2 id="增删改查"><a href="#增删改查" class="headerlink" title="增删改查"></a>增删改查</h2><p>1.增删改<br>方法<code>getReadableDatabase()</code>或<code>getWriteDatabase()</code>会返回一个SQLiteDatabase对象，借助该对象可以实现对数据的增删查改。<br>主活动中：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">SQLiteDatabase db = dbHelper.getWriteDatabase();</span><br><span class="line">ContentValues values = <span class="keyword">new</span> ContentValues();</span><br><span class="line">values.put(<span class="string">"id"</span>,<span class="number">001</span>);</span><br><span class="line">values.put(<span class="string">"author"</span>,<span class="string">"xusong"</span>);</span><br><span class="line">db.insert(<span class="string">"Book"</span>,<span class="keyword">null</span>,values);</span><br><span class="line">db.update(<span class="string">"Book"</span>,values,<span class="string">"id = 001"</span>);</span><br><span class="line">db.delete(<span class="string">"Book"</span>,values,<span class="string">"id = 001"</span>);</span><br></pre></td></tr></table></figure></p>
+<p><br><br>2.查<br><code>Cursor cursor = db.query(&quot;Book&quot;,null,null,null,null,null,null)</code><br><code>cursor.moveToFirst()</code>指针移动到第一个，<code>cursor.moveToNext()</code>指针后移。</p>
+<p>//</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/05/07/Base/Data-structure/" rel="next" title="数据结构">
+                <i class="fa fa-chevron-left"></i> 数据结构
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/06/06/essay/nculiyan/" rel="prev" title="太煽情不符合我高冷的气质。">
+                太煽情不符合我高冷的气质。 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image" src="/images/avatar.gif" alt="嗷小蝶">
+          <p class="site-author-name" itemprop="name">嗷小蝶</p>
+           
+              <p class="site-description motion-element" itemprop="description">雾里看花也不失为一种幸福</p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/">
+                <span class="site-state-item-count">33</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">10</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">1</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+          <div class="feed-link motion-element">
+            <a href="/atom.xml" rel="alternate">
+              <i class="fa fa-rss"></i>
+              RSS
+            </a>
+          </div>
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="http://github.com" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                    
+                      GitHub
+                    
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/u/1852414964/home?wvr=5&lf=reg" target="_blank" title="Weibo">
+                  
+                    <i class="fa fa-fw fa-weibo"></i>
+                  
+                    
+                      Weibo
+                    
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#四大组件"><span class="nav-number">1.</span> <span class="nav-text">四大组件</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Activity"><span class="nav-number">1.1.</span> <span class="nav-text">Activity</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Service"><span class="nav-number">1.2.</span> <span class="nav-text">Service</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#BroadcastRecevier"><span class="nav-number">1.3.</span> <span class="nav-text">BroadcastRecevier</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ContentProvider"><span class="nav-number">1.4.</span> <span class="nav-text">ContentProvider</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#其他"><span class="nav-number">1.5.</span> <span class="nav-text">其他</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#intent和intentFiltet"><span class="nav-number">1.5.1.</span> <span class="nav-text">intent和intentFiltet</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#null"><span class="nav-number">1.6.</span> <span class="nav-text"></span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#界面编程"><span class="nav-number">2.</span> <span class="nav-text">界面编程</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#9Patch"><span class="nav-number">2.1.</span> <span class="nav-text">9Patch</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Toast显示提示信息框"><span class="nav-number">2.2.</span> <span class="nav-text">Toast显示提示信息框</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#对话框"><span class="nav-number">2.3.</span> <span class="nav-text">对话框</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#AlertDialog"><span class="nav-number">2.3.1.</span> <span class="nav-text">AlertDialog</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Menu"><span class="nav-number">2.4.</span> <span class="nav-text">Menu</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#-1"><span class="nav-number">2.5.</span> <span class="nav-text"></span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#图形与图像处理"><span class="nav-number">3.</span> <span class="nav-text">图形与图像处理</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Bitmap和Drawable"><span class="nav-number">3.1.</span> <span class="nav-text">Bitmap和Drawable</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#绘图"><span class="nav-number">3.2.</span> <span class="nav-text">绘图</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#双缓冲技术"><span class="nav-number">3.3.</span> <span class="nav-text">双缓冲技术</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#AnimationDrawable逐帧动画"><span class="nav-number">3.4.</span> <span class="nav-text">AnimationDrawable逐帧动画</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#SurfaceView"><span class="nav-number">3.5.</span> <span class="nav-text">SurfaceView</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#-2"><span class="nav-number">3.6.</span> <span class="nav-text"></span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#线程"><span class="nav-number">4.</span> <span class="nav-text">线程</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#线程的基本用法"><span class="nav-number">4.1.</span> <span class="nav-text">线程的基本用法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Handler消息传递机制"><span class="nav-number">4.2.</span> <span class="nav-text">Handler消息传递机制</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#使用AsyncTask"><span class="nav-number">4.3.</span> <span class="nav-text">使用AsyncTask</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#服务"><span class="nav-number">4.4.</span> <span class="nav-text">服务</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#创建一个服务："><span class="nav-number">4.4.1.</span> <span class="nav-text">创建一个服务：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#启动和停止服务"><span class="nav-number">4.4.2.</span> <span class="nav-text">启动和停止服务</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#活动和服务的通信"><span class="nav-number">4.4.3.</span> <span class="nav-text">活动和服务的通信</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#-3"><span class="nav-number">4.5.</span> <span class="nav-text"></span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#多媒体"><span class="nav-number">5.</span> <span class="nav-text">多媒体</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#MediaPlayer播放音乐"><span class="nav-number">5.1.</span> <span class="nav-text">MediaPlayer播放音乐</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#-4"><span class="nav-number">5.2.</span> <span class="nav-text"></span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#ListView和RecycleView"><span class="nav-number">6.</span> <span class="nav-text">ListView和RecycleView</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#ListView"><span class="nav-number">6.1.</span> <span class="nav-text">ListView</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#RecycleView"><span class="nav-number">6.2.</span> <span class="nav-text">RecycleView</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#-5"><span class="nav-number">6.3.</span> <span class="nav-text"></span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#广播机制"><span class="nav-number">7.</span> <span class="nav-text">广播机制</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#类型"><span class="nav-number">7.1.</span> <span class="nav-text">类型</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#接收系统广播"><span class="nav-number">7.2.</span> <span class="nav-text">接收系统广播</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#动态注册监听网络变化"><span class="nav-number">7.2.1.</span> <span class="nav-text">动态注册监听网络变化</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#静态注册实现开机启动"><span class="nav-number">7.2.2.</span> <span class="nav-text">静态注册实现开机启动</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#发送自定义广播"><span class="nav-number">7.3.</span> <span class="nav-text">发送自定义广播</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#发送标准广播"><span class="nav-number">7.3.1.</span> <span class="nav-text">发送标准广播</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#发送有序广播"><span class="nav-number">7.3.2.</span> <span class="nav-text">发送有序广播</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#-6"><span class="nav-number">7.4.</span> <span class="nav-text"></span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#SQLite数据库"><span class="nav-number">8.</span> <span class="nav-text">SQLite数据库</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#建库"><span class="nav-number">8.1.</span> <span class="nav-text">建库</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#增删改查"><span class="nav-number">8.2.</span> <span class="nav-text">增删改查</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">嗷小蝶</span>
+
+  
+</div>
+
+
+  <!--<div class="powered-by">
+    由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+  </div>
+  -->
+  
+  <div class="powered-by">
+  <i class="fa fa-user-md"></i><span id="busuanzi_container_site_uv">
+    本站访客数:<span id="busuanzi_value_site_uv"></span>
+  </span>
+  </div>
+
+  <span class="post-meta-divider">|</span>
+
+  <div class="theme-info">
+    主题 &mdash;
+    <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+      NexT.Muse
+    </a>
+  </div>
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.2"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.2"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

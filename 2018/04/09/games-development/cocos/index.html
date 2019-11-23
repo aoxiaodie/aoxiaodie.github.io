@@ -1,0 +1,797 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.2" rel="stylesheet" type="text/css">
+
+
+  <meta name="keywords" content="Hexo, NexT">
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="aoxiaodie" type="application/atom+xml">
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.2">
+
+
+
+
+
+
+<meta name="description" content="结构解决方案目录结构1.resource文件夹主要用于存放游戏中需要的图片、音频和配置等资源文件。 2.src文件夹（Classes）存放AppDelegate文件、GameScene（场景类）文件、GameSprite（精灵类）文件以及GameLayer（层）文件。 3.win32文件夹main函数。 基本概念导演（Director）主要作用：  （1）环境设定（初始化OpenGL和渲染器）（2">
+<meta property="og:type" content="article">
+<meta property="og:title" content="cocos2d-x入门">
+<meta property="og:url" content="https://aoxiaodie.github.io/2018/04/09/games-development/cocos/index.html">
+<meta property="og:site_name" content="aoxiaodie">
+<meta property="og:description" content="结构解决方案目录结构1.resource文件夹主要用于存放游戏中需要的图片、音频和配置等资源文件。 2.src文件夹（Classes）存放AppDelegate文件、GameScene（场景类）文件、GameSprite（精灵类）文件以及GameLayer（层）文件。 3.win32文件夹main函数。 基本概念导演（Director）主要作用：  （1）环境设定（初始化OpenGL和渲染器）（2">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="https://aoxiaodie.github.io/assets/image/data/cocos/Director_Scene.PNG">
+<meta property="og:image" content="https://aoxiaodie.github.io/assets/image/data/cocos/class.PNG">
+<meta property="og:image" content="https://aoxiaodie.github.io/assets/image/data/cocos/relation.PNG">
+<meta property="og:image" content="https://aoxiaodie.github.io/assets/image/data/cocos/classes.PNG">
+<meta property="og:updated_time" content="2019-02-27T08:36:46.231Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="cocos2d-x入门">
+<meta name="twitter:description" content="结构解决方案目录结构1.resource文件夹主要用于存放游戏中需要的图片、音频和配置等资源文件。 2.src文件夹（Classes）存放AppDelegate文件、GameScene（场景类）文件、GameSprite（精灵类）文件以及GameLayer（层）文件。 3.win32文件夹main函数。 基本概念导演（Director）主要作用：  （1）环境设定（初始化OpenGL和渲染器）（2">
+<meta name="twitter:image" content="https://aoxiaodie.github.io/assets/image/data/cocos/Director_Scene.PNG">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://aoxiaodie.github.io/2018/04/09/games-development/cocos/">
+
+
+
+
+
+  <title>cocos2d-x入门 | aoxiaodie</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">aoxiaodie</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">江南烟雨却痴缠</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            主页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-book"></i> <br>
+            
+            文章
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-collocation">
+          <a href="/tags/收藏" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-folder-open"></i> <br>
+            
+            收藏
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://aoxiaodie.github.io/2018/04/09/games-development/cocos/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="嗷小蝶">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="aoxiaodie">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">cocos2d-x入门</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-04-09T16:45:46+08:00">
+                2018-04-09
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/游戏开发/" itemprop="url" rel="index">
+                    <span itemprop="name">游戏开发</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="结构"><a href="#结构" class="headerlink" title="结构"></a>结构</h1><h2 id="解决方案目录结构"><a href="#解决方案目录结构" class="headerlink" title="解决方案目录结构"></a>解决方案目录结构</h2><p>1.resource文件夹<br>主要用于存放游戏中需要的图片、音频和配置等资源文件。</p>
+<p>2.src文件夹（Classes）<br>存放AppDelegate文件、GameScene（场景类）文件、GameSprite（精灵类）文件以及GameLayer（层）文件。</p>
+<p>3.win32文件夹<br>main函数。<br><br></p>
+<h1 id="基本概念"><a href="#基本概念" class="headerlink" title="基本概念"></a>基本概念</h1><h2 id="导演（Director）"><a href="#导演（Director）" class="headerlink" title="导演（Director）"></a>导演（Director）</h2><p>主要作用：</p>
+<blockquote>
+<p>（1）环境设定（初始化OpenGL和渲染器）<br>（2）场景管理<br>（3）执行主循环<br>游戏就是个死循环，不断地渲染，再一帧一帧的绘制出来。</p>
+</blockquote>
+<p><br></p>
+<h2 id="场景（Scene）"><a href="#场景（Scene）" class="headerlink" title="场景（Scene）"></a>场景（Scene）</h2><p>游戏里关卡、版块的切换就是场景的切换。<br>其一个重要作用是流程控制。<br>可以用Director控制场景：<br><img src="/assets/image/data/cocos/Director_Scene.PNG" alt="Director_Scene"></p>
+<h3 id="场景图"><a href="#场景图" class="headerlink" title="场景图"></a>场景图</h3><p>是一种安排场景内对象的数据结构，它把场景内所有的节点(Node)都包含在一个 树(tree)上。<br>虽然称为“图”，但实际是用一个树结构来表示。<br>每个元素就是一个节点，通过z-order来设置节点的位置，z-order为负的被放置在左子树，非负的即在右子树。cocos2d-x使用 <strong>中序遍历</strong> ，先遍历左子树，然后根节点，最后右子树。<br><br><br>构建场景图：<code>Scene</code>的<code>addChild()</code>方法。<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">scene-&gt;addChild(title_node,<span class="number">-2</span>)</span><br><span class="line">scene-&gt;addChild(lable_node)</span><br></pre></td></tr></table></figure></p>
+<p><br></p>
+<h3 id="场景切换"><a href="#场景切换" class="headerlink" title="场景切换"></a>场景切换</h3><p>1.<code>runWithScene()</code>用于开始游戏，加载第一个场景。<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">auto</span> myScene = Scene::create();</span><br><span class="line">Director::getInstance()-&gt;runWithScene(myScene);</span><br></pre></td></tr></table></figure></p>
+<p>2.<code>replaceScene()</code>使用传入的场景替换当前场景来切换画面，当前场景被释放。这是切换场景时最常用的方法。</p>
+<p>3.<code>pushScene()</code>将当前运行中的场景暂停并压入到场景栈中，再将传入的场景设置为当前运行场景。只有存在正在运行的场景时才能调用该方法。</p>
+<p>4.<code>popScene()</code>释放当前场景，再从场景栈中弹出栈顶的场景，并将其设置为当前运行场景。如果栈为空，直接结束应用。<br><br></p>
+<h2 id="Node节点"><a href="#Node节点" class="headerlink" title="Node节点"></a>Node节点</h2><p>Node类是绝大部分类的父类。<br><img src="/assets/image/data/cocos/class.PNG" alt="Classes"><br><br></p>
+<h2 id="层（Layer）"><a href="#层（Layer）" class="headerlink" title="层（Layer）"></a>层（Layer）</h2><p>层包含的是直接在屏幕上呈现的内容，并且可以接受用户的输入事件，包括触摸、键盘输入等。我们需要在层中加入精灵，文本标签或者其他游戏元素，并设置游戏元素的属性，比如位置，方向和大小；设置游戏元素的动作等。<br><br></p>
+<h2 id="精灵（Sprite）"><a href="#精灵（Sprite）" class="headerlink" title="精灵（Sprite）"></a>精灵（Sprite）</h2><p>能够被控制的对象才是精灵，无法控制的对象就只是一个节点（Node）。<br><br><br>锚点（anchor point）<br>所有的节点对象都有锚点。<br>锚点是节点对象在计算坐标位置时的一个基准点。<br><br></p>
+<h4 id="创建一个精灵："><a href="#创建一个精灵：" class="headerlink" title="创建一个精灵："></a>创建一个精灵：</h4><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">auto</span> mySprite = Sprite::create(<span class="string">"mysprite.png"</span>);</span><br><span class="line"><span class="comment">// 一些属性</span></span><br><span class="line">mySprite-&gt;setPosition(Vec2(<span class="number">500</span>, <span class="number">0</span>)); <span class="comment">// 位置</span></span><br><span class="line">mySprite-&gt;setRotation(<span class="number">40</span>); <span class="comment">// 旋转角度</span></span><br><span class="line">mySprite-&gt;setScale(<span class="number">2.0</span>); <span class="comment">// 缩放比例</span></span><br><span class="line">mySprite-&gt;setAnchorPoint(Vec2(<span class="number">0</span>, <span class="number">0</span>)); <span class="comment">// 锚点</span></span><br><span class="line">mySprite-&gt;setColor(Color3B::WHITE); <span class="comment">// 颜色</span></span><br><span class="line">mySprite-&gt;setColor(Color3B(<span class="number">255</span>, <span class="number">255</span>, <span class="number">255</span>));</span><br><span class="line">mySprite-&gt;setOpacity(<span class="number">30</span>); <span class="comment">// 透明度</span></span><br></pre></td></tr></table></figure>
+<p><img src="/assets/image/data/cocos/relation.PNG" alt="relation"><br><br></p>
+<h4 id="图集"><a href="#图集" class="headerlink" title="图集"></a>图集</h4><p>图集（Sprite Sheet）是通过专门的工具将多张图片合成一张大图，并通过plist等格式的文件索引资源。<br>使用图集比使用多个独立图像占用的磁盘空间更少，且有更好的性能。</p>
+<p><code>SpriteFrameCache</code>是一个全局的缓存类，在使用图集时，首先将全部资源加载到<code>SpriteFrameCache</code>中，缓存了添加的<code>SpriteFrame</code>对象，<code>SpriteFrame</code>只加载一次，后续一直保存在<code>SpriteFrameCache</code>中。</p>
+<p>加载图集的方法：<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">auto</span> spritecache = SpriteFrameCache::getInstance();</span><br><span class="line">spritecache-&gt;addSpriteFramesWithFile(<span class="string">"sprites.plist"</span>);</span><br></pre></td></tr></table></figure></p>
+<p><br></p>
+<h4 id="精灵缓存"><a href="#精灵缓存" class="headerlink" title="精灵缓存"></a>精灵缓存</h4><p>把精灵放入精灵缓存对象中，提高精灵的访问速度：<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">auto</span> mysprite = Sprite::createWithSpriteFrameName(<span class="string">"mysprite.png"</span>);</span><br></pre></td></tr></table></figure></p>
+<p><br><br>还可以从精灵缓存对象<code>SpriteFrameCache</code>中访问一个精灵：<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">auto</span> newspriteFrame = SpriteFrameCache::getInstance()-&gt;getSpriteFrameByName(<span class="string">"Blue_Front1.png"</span>); <span class="comment">// 获取</span></span><br><span class="line"><span class="keyword">auto</span> newSprite = Sprite::createWithSpriteFrame(newspriteFrame); <span class="comment">//创建</span></span><br></pre></td></tr></table></figure></p>
+<p><br></p>
+<h2 id="动作（Action）"><a href="#动作（Action）" class="headerlink" title="动作（Action）"></a>动作（Action）</h2><p>动作可以让精灵在场景中移动，如从一个点移动到另外一个点。</p>
+<p>Action对象的创建：<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">auto</span> mySprite = Sprite::create(<span class="string">"Blue_Front1.png"</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">auto</span> moveBy = MoveBy::create(<span class="number">2</span>, Vec2(<span class="number">50</span>,<span class="number">10</span>));</span><br><span class="line">mySprite-&gt;runAction(moveBy);</span><br><span class="line"></span><br><span class="line"><span class="keyword">auto</span> moveTo = MoveTo::create(<span class="number">2</span>, Vec2(<span class="number">50</span>,<span class="number">10</span>));</span><br><span class="line">mySprite-&gt;runAction(moveTo);</span><br></pre></td></tr></table></figure></p>
+<p><br></p>
+<h3 id="By和To的区别"><a href="#By和To的区别" class="headerlink" title="By和To的区别"></a>By和To的区别</h3><p>如果想让动作的表现相对于Node当前位置的，就用By；<br>如果想让动作的表现是按照坐标的绝对位置的，就用To。<br><br></p>
+<h3 id="基本动作"><a href="#基本动作" class="headerlink" title="基本动作"></a>基本动作</h3><p>1.移动<br>使用<code>MoveTo</code>  <code>MoveBy</code>完成节点对象在一个设置的时间后移动。</p>
+<p>2.旋转<br><code>RotateTo</code> <code>RotateBy</code></p>
+<p>3.缩放<br><code>ScaleTo</code> <code>ScaleBy</code></p>
+<p>4.淡入淡出<br><code>FadeIn</code>从完全透明到完全不透明，<code>FadeOut</code>则相反。</p>
+<p>5.色彩混合<br><code>TintTo</code> <code>TintBy</code><br><br></p>
+<h3 id="动作序列（Sequence）"><a href="#动作序列（Sequence）" class="headerlink" title="动作序列（Sequence）"></a>动作序列（Sequence）</h3><p>可以通过创建一个动作序列(Sequence)，让精灵按照这个序列做连续的动作。</p>
+<p>动作序列(Sequence) 是一种封装多个动作的对象，当这个对象执行时被封装的动作会顺序执行。</p>
+<h4 id="Spawn"><a href="#Spawn" class="headerlink" title="Spawn"></a>Spawn</h4><p>Spawn可以同时执行多个动作，效果和同时运行多个动作的<code>runAction()</code>方法相同。<br>如：<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">auto</span> mySprite = Sprite::create(<span class="string">"mysprite.png"</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">auto</span> moveBy = MoveBy::create(<span class="number">10</span>, Vec2(<span class="number">400</span>,<span class="number">100</span>));</span><br><span class="line"><span class="keyword">auto</span> fadeTo = FadeTo::create(<span class="number">2.0f</span>, <span class="number">120.0f</span>);</span><br></pre></td></tr></table></figure></p>
+<p>使用Spawn：<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">auto</span> mySpawn = Spawn::createWithTwoActions(moveBy, fadeTo);</span><br><span class="line">mySprite-&gt;runAction(mySpawn);</span><br></pre></td></tr></table></figure></p>
+<p>或者同时调用<code>runAction()</code>：<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">mySprite-&gt;runAction(moveBy);</span><br><span class="line">mySprite-&gt;runAction(fadeTo);</span><br></pre></td></tr></table></figure></p>
+<p><br></p>
+<h3 id="动作的克隆"><a href="#动作的克隆" class="headerlink" title="动作的克隆"></a>动作的克隆</h3><p><code>clone()</code><br><br></p>
+<h3 id="动作的倒转"><a href="#动作的倒转" class="headerlink" title="动作的倒转"></a>动作的倒转</h3><p><code>reverse()</code><br><br><br><br><br><br></p>
+<hr>
+<h1 id="菜单"><a href="#菜单" class="headerlink" title="菜单"></a>菜单</h1><p><img src="/assets/image/data/cocos/classes.PNG" alt="classes"><br><br><br><br><br><br></p>
+<hr>
+<h1 id="UI组件"><a href="#UI组件" class="headerlink" title="UI组件"></a>UI组件</h1>
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/03/21/language/kotlin/" rel="next" title="kotlin">
+                <i class="fa fa-chevron-left"></i> kotlin
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/05/07/Base/Data-structure/" rel="prev" title="数据结构">
+                数据结构 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image" src="/images/avatar.gif" alt="嗷小蝶">
+          <p class="site-author-name" itemprop="name">嗷小蝶</p>
+           
+              <p class="site-description motion-element" itemprop="description">雾里看花也不失为一种幸福</p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/">
+                <span class="site-state-item-count">33</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">10</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">1</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+          <div class="feed-link motion-element">
+            <a href="/atom.xml" rel="alternate">
+              <i class="fa fa-rss"></i>
+              RSS
+            </a>
+          </div>
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="http://github.com" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                    
+                      GitHub
+                    
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/u/1852414964/home?wvr=5&lf=reg" target="_blank" title="Weibo">
+                  
+                    <i class="fa fa-fw fa-weibo"></i>
+                  
+                    
+                      Weibo
+                    
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#结构"><span class="nav-number">1.</span> <span class="nav-text">结构</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#解决方案目录结构"><span class="nav-number">1.1.</span> <span class="nav-text">解决方案目录结构</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#基本概念"><span class="nav-number">2.</span> <span class="nav-text">基本概念</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#导演（Director）"><span class="nav-number">2.1.</span> <span class="nav-text">导演（Director）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#场景（Scene）"><span class="nav-number">2.2.</span> <span class="nav-text">场景（Scene）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#场景图"><span class="nav-number">2.2.1.</span> <span class="nav-text">场景图</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#场景切换"><span class="nav-number">2.2.2.</span> <span class="nav-text">场景切换</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Node节点"><span class="nav-number">2.3.</span> <span class="nav-text">Node节点</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#层（Layer）"><span class="nav-number">2.4.</span> <span class="nav-text">层（Layer）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#精灵（Sprite）"><span class="nav-number">2.5.</span> <span class="nav-text">精灵（Sprite）</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#创建一个精灵："><span class="nav-number">2.5.0.1.</span> <span class="nav-text">创建一个精灵：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#图集"><span class="nav-number">2.5.0.2.</span> <span class="nav-text">图集</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#精灵缓存"><span class="nav-number">2.5.0.3.</span> <span class="nav-text">精灵缓存</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#动作（Action）"><span class="nav-number">2.6.</span> <span class="nav-text">动作（Action）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#By和To的区别"><span class="nav-number">2.6.1.</span> <span class="nav-text">By和To的区别</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#基本动作"><span class="nav-number">2.6.2.</span> <span class="nav-text">基本动作</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#动作序列（Sequence）"><span class="nav-number">2.6.3.</span> <span class="nav-text">动作序列（Sequence）</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Spawn"><span class="nav-number">2.6.3.1.</span> <span class="nav-text">Spawn</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#动作的克隆"><span class="nav-number">2.6.4.</span> <span class="nav-text">动作的克隆</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#动作的倒转"><span class="nav-number">2.6.5.</span> <span class="nav-text">动作的倒转</span></a></li></ol></li></ol><li class="nav-item nav-level-1"><a class="nav-link" href="#菜单"><span class="nav-number">3.</span> <span class="nav-text">菜单</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#UI组件"><span class="nav-number">4.</span> <span class="nav-text">UI组件</span></a></li></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">嗷小蝶</span>
+
+  
+</div>
+
+
+  <!--<div class="powered-by">
+    由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+  </div>
+  -->
+  
+  <div class="powered-by">
+  <i class="fa fa-user-md"></i><span id="busuanzi_container_site_uv">
+    本站访客数:<span id="busuanzi_value_site_uv"></span>
+  </span>
+  </div>
+
+  <span class="post-meta-divider">|</span>
+
+  <div class="theme-info">
+    主题 &mdash;
+    <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+      NexT.Muse
+    </a>
+  </div>
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.2"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.2"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
