@@ -1,0 +1,777 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.2" rel="stylesheet" type="text/css">
+
+
+  <meta name="keywords" content="Hexo, NexT">
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="aoxiaodie" type="application/atom+xml">
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.2">
+
+
+
+
+
+
+<meta name="description" content="python文件和目录O/S文件/目录方法-具体参考文档 读取键盘输入：raw_input和input，后者可以读取python表达式并输出结果str = raw_input(“请输入”)print str 文件夹路径分隔符1、Linux：/2、windows：\ 打开和关闭文件open函数File object = open(file_name,[access_mode][,buffering]">
+<meta property="og:type" content="article">
+<meta property="og:title" content="python深入之文件操作">
+<meta property="og:url" content="https://aoxiaodie.github.io/2019/11/28/language/python-03/index.html">
+<meta property="og:site_name" content="aoxiaodie">
+<meta property="og:description" content="python文件和目录O/S文件/目录方法-具体参考文档 读取键盘输入：raw_input和input，后者可以读取python表达式并输出结果str = raw_input(“请输入”)print str 文件夹路径分隔符1、Linux：/2、windows：\ 打开和关闭文件open函数File object = open(file_name,[access_mode][,buffering]">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2019-12-02T11:50:57.950Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="python深入之文件操作">
+<meta name="twitter:description" content="python文件和目录O/S文件/目录方法-具体参考文档 读取键盘输入：raw_input和input，后者可以读取python表达式并输出结果str = raw_input(“请输入”)print str 文件夹路径分隔符1、Linux：/2、windows：\ 打开和关闭文件open函数File object = open(file_name,[access_mode][,buffering]">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://aoxiaodie.github.io/2019/11/28/language/python-03/">
+
+
+
+
+
+  <title>python深入之文件操作 | aoxiaodie</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">aoxiaodie</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">飘然一曲诱我侧耳听</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            主页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-book"></i> <br>
+            
+            文章
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-collocation">
+          <a href="/tags/收藏" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-folder-open"></i> <br>
+            
+            收藏
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://aoxiaodie.github.io/2019/11/28/language/python-03/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="嗷小蝶">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="aoxiaodie">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">python深入之文件操作</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-11-28T19:08:05+08:00">
+                2019-11-28
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/高级程序语言/" itemprop="url" rel="index">
+                    <span itemprop="name">高级程序语言</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="python文件和目录"><a href="#python文件和目录" class="headerlink" title="python文件和目录"></a>python文件和目录</h1><p>O/S文件/目录方法-具体参考文档</p>
+<h2 id="读取键盘输入：raw-input和input，后者可以读取python表达式并输出结果"><a href="#读取键盘输入：raw-input和input，后者可以读取python表达式并输出结果" class="headerlink" title="读取键盘输入：raw_input和input，后者可以读取python表达式并输出结果"></a>读取键盘输入：raw_input和input，后者可以读取python表达式并输出结果</h2><p>str = raw_input(“请输入”)<br>print str<br><br></p>
+<h2 id="文件夹"><a href="#文件夹" class="headerlink" title="文件夹"></a>文件夹</h2><p>路径分隔符<br>1、Linux：/<br>2、windows：\<br><br></p>
+<h2 id="打开和关闭文件"><a href="#打开和关闭文件" class="headerlink" title="打开和关闭文件"></a>打开和关闭文件</h2><h3 id="open函数"><a href="#open函数" class="headerlink" title="open函数"></a>open函数</h3><p>File object = open(file_name,[access_mode][,buffering])<br>file_name：文件名<br>access_mode：访问模式，默认为只读r<br>buffering：如果buffering的值被设为0，就不会有寄存。如果buffering的值取1，访问文件时会寄存行。如果将buffering的值设为大于1的整数，表明了这就是的寄存区的缓冲大小。如果取负值，寄存区的缓冲大小则为系统默认。</p>
+<p>file对象属性<br>file.closed，返回值true或者false<br>file.mode，访问模式</p>
+<blockquote>
+<p>r/r+<br>w/w+<br>a/a+<br>b</p>
+</blockquote>
+<p>file.name，文件名<br>file.softspace，如果用print输出后，必须跟一个空格符，则返回false。否则返回true？</p>
+<h3 id="读取"><a href="#读取" class="headerlink" title="读取"></a>读取</h3><p>file.read()<br>file.next() # 返回下一行<br>file.readline # 读取整行，包括”\n”字符<br>file.readlines # 读取所有行并返回列表<br><br></p>
+<h3 id="close方法"><a href="#close方法" class="headerlink" title="close方法"></a>close方法</h3><p>fileobject.close()<br><br></p>
+<h3 id="write方法"><a href="#write方法" class="headerlink" title="write方法"></a>write方法</h3><p>注：write()方法不会在字符串的结尾添加换行符(‘\n’)：<br>fileobject.write(string)，string即要写入打开的文件的内容<br><br></p>
+<h3 id="文件定位"><a href="#文件定位" class="headerlink" title="文件定位"></a>文件定位</h3><p>tell()返回文件的当前位置<br>seek(offset[,from])改变当前文件的位置，offset表示要移动的字节数，from指定开始移动字节的参考位置<br><br></p>
+<h3 id="重命名和删除文件"><a href="#重命名和删除文件" class="headerlink" title="重命名和删除文件"></a>重命名和删除文件</h3><p>rename(current_file_name, new_file_name)<br>remove(file_name)<br><br></p>
+<h2 id="目录"><a href="#目录" class="headerlink" title="目录"></a>目录</h2><p>在当前目录下创建新的目录：mkdir()<br>改变当前目录（跳转？）：chdir()<br>显示当前目录：getcwd()<br>删除目录：rmdir()<br><br></p>
+<h2 id="操作各种文件"><a href="#操作各种文件" class="headerlink" title="操作各种文件"></a>操作各种文件</h2><h3 id="文本文件（-txt）"><a href="#文本文件（-txt）" class="headerlink" title="文本文件（.txt）"></a>文本文件（.txt）</h3><p>一个例子：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">filePath = <span class="string">"d:\\Learning\\PythonWork\\other\\test.txt"</span></span><br><span class="line"><span class="keyword">try</span>:</span><br><span class="line">    fp = open(filePath,<span class="string">'r+'</span>)</span><br><span class="line">    print(fp.readlines())</span><br><span class="line"></span><br><span class="line">    lst = [<span class="string">"gggg\n"</span>,<span class="string">"kkkk\n"</span>]</span><br><span class="line">    fp.writelines(lst)</span><br><span class="line"><span class="keyword">finally</span>:</span><br><span class="line">    <span class="keyword">if</span> fp:</span><br><span class="line">        fp.close()</span><br></pre></td></tr></table></figure></p>
+<p>或者<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">with</span> open(filePath) <span class="keyword">as</span> fp:</span><br><span class="line">print(fp.readlines())</span><br></pre></td></tr></table></figure></p>
+<p><br></p>
+<h3 id="ini文件"><a href="#ini文件" class="headerlink" title="ini文件"></a>ini文件</h3><p>首先是ini文件结构</p>
+<blockquote>
+<p>[section1]<br>option1 = item1<br>option2 = item2<br><br><br>[section2]<br>option3 = item3</p>
+</blockquote>
+<p>引入模块<code>import configparser</code></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> configparser</span><br><span class="line"></span><br><span class="line">filePath = <span class="string">'d:\\Learning\\PythonWork\\other\\test.ini'</span></span><br><span class="line"></span><br><span class="line">config = configparser.ConfigParser()</span><br><span class="line">config.read(filePath)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 读取</span></span><br><span class="line">print(config.sections())</span><br><span class="line">print(config.options(<span class="string">'section2'</span>))</span><br><span class="line">print(config.items(<span class="string">'section2'</span>))</span><br><span class="line">print(config.get(<span class="string">'section1'</span>, <span class="string">'option1'</span>))</span><br><span class="line"></span><br><span class="line"><span class="comment"># 修改</span></span><br><span class="line">fp = open(filePath, <span class="string">'w+'</span>)</span><br><span class="line">config.add_section(<span class="string">'section3'</span>)</span><br><span class="line">config.set(<span class="string">'section3'</span>, <span class="string">'option4'</span>, <span class="string">'item4'</span>)</span><br><span class="line">config.write(fp)</span><br></pre></td></tr></table></figure>
+<p><br></p>
+<h3 id="xml文件"><a href="#xml文件" class="headerlink" title="xml文件"></a>xml文件</h3><p>xml文件结构：</p>
+<blockquote>
+<p>&lt;?xml version=”1.0” encoding=”ISO-8859-1”?&gt;<br><data><br>　　<country name="Liechtenstein"><br>　　　　<rank>1</rank><br>　　　　<year>2008</year><br>　　　　<gdppc>141100</gdppc><br>　　　　<neighbor name="Austria" direction="E"><br>　　　　<neighbor name="Switzerland" direction="W"><br>　　</neighbor></neighbor></country><br>　　<country name="Singapore"><br>　　　　<rank>4</rank><br>　　　　<year>2011</year><br>　　　　<gdppc>59900</gdppc><br>　　　　<neighbor name="Malaysia" direction="N"><br>　　</neighbor></country><br>　　<country name="Panama"><br>　　　　<rank>68</rank><br>　　　　<year>2011</year><br>　　　　<gdppc>13600</gdppc><br>　　　　<neighbor name="Costa Rica" direction="W"><br>　　　　<neighbor name="Colombia" direction="E"><br>　　</neighbor></neighbor></country><br></data></p>
+</blockquote>
+<p>引入模块<code>xml.etree.ElementTree</code></p>
+<blockquote>
+<p>ag：获取该元素节点的 <strong>标签</strong>。比如根节点的标签是<data>，那么tree.tag返回的就是字符串data<br>attrib：获取该元素节点的 <strong>属性</strong> 字典，没有属性就返回空字典。比如元素标签为country的节点的属性为name=’Liechetenstein’那么返回的就是字典{name : ‘Liechetenstein’}<br>text：若该元素内没有再嵌套，那么返回的就是该元素的 <strong>内容</strong>（类型视元素内容的类型而定）。比如year元素调用text后返回的是2008</data></p>
+</blockquote>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> xml.etree.ElementTree <span class="keyword">as</span> ET</span><br><span class="line"></span><br><span class="line">filePath = <span class="string">'d:\\Learning\\PythonWork\\other\\test.xml'</span></span><br><span class="line">tree = ET.parse(filePath) <span class="comment"># 载入XML文件</span></span><br><span class="line"></span><br><span class="line">root = tree.getroot() <span class="comment"># 获取根节点</span></span><br><span class="line">print(len(root)) <span class="comment"># 查看子节点个数</span></span><br><span class="line"></span><br><span class="line">print(<span class="string">'tag:'</span>, root.tag, <span class="string">'attrib:'</span>, root.attrib, <span class="string">'text:'</span>, root.text)</span><br><span class="line"></span><br><span class="line">country = root.find(<span class="string">'country'</span>) <span class="comment"># find获得已知名称的字节点</span></span><br><span class="line">print(<span class="string">'tag:'</span>, country.tag, <span class="string">'attrib:'</span>, country.attrib, <span class="string">'text:'</span>, country.text)</span><br><span class="line"></span><br><span class="line">nodes = root.findall(<span class="string">'country'</span>) <span class="comment"># findall方法获取所有子节点，返回的节点会存在一个列表中</span></span><br><span class="line">print(<span class="string">'tag:'</span>, nodes[<span class="number">1</span>].tag, <span class="string">'attrib:'</span>, nodes[<span class="number">1</span>].attrib, <span class="string">'text:'</span>, nodes[<span class="number">1</span>].text)</span><br></pre></td></tr></table></figure>
+<p><br><br><br><br><br></p>
+<p>·</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/11/23/blogs-about/hexo-new/" rel="next" title="更换电脑后如何在新电脑重新搭建环境">
+                <i class="fa fa-chevron-left"></i> 更换电脑后如何在新电脑重新搭建环境
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image" src="/images/avatar.gif" alt="嗷小蝶">
+          <p class="site-author-name" itemprop="name">嗷小蝶</p>
+           
+              <p class="site-description motion-element" itemprop="description">雾里看花也不失为一种幸福</p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/">
+                <span class="site-state-item-count">34</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">10</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">1</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+          <div class="feed-link motion-element">
+            <a href="/atom.xml" rel="alternate">
+              <i class="fa fa-rss"></i>
+              RSS
+            </a>
+          </div>
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="http://github.com" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                    
+                      GitHub
+                    
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/u/1852414964/home?wvr=5&lf=reg" target="_blank" title="Weibo">
+                  
+                    <i class="fa fa-fw fa-weibo"></i>
+                  
+                    
+                      Weibo
+                    
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#python文件和目录"><span class="nav-number">1.</span> <span class="nav-text">python文件和目录</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#读取键盘输入：raw-input和input，后者可以读取python表达式并输出结果"><span class="nav-number">1.1.</span> <span class="nav-text">读取键盘输入：raw_input和input，后者可以读取python表达式并输出结果</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#文件夹"><span class="nav-number">1.2.</span> <span class="nav-text">文件夹</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#打开和关闭文件"><span class="nav-number">1.3.</span> <span class="nav-text">打开和关闭文件</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#open函数"><span class="nav-number">1.3.1.</span> <span class="nav-text">open函数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#读取"><span class="nav-number">1.3.2.</span> <span class="nav-text">读取</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#close方法"><span class="nav-number">1.3.3.</span> <span class="nav-text">close方法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#write方法"><span class="nav-number">1.3.4.</span> <span class="nav-text">write方法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#文件定位"><span class="nav-number">1.3.5.</span> <span class="nav-text">文件定位</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#重命名和删除文件"><span class="nav-number">1.3.6.</span> <span class="nav-text">重命名和删除文件</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#目录"><span class="nav-number">1.4.</span> <span class="nav-text">目录</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#操作各种文件"><span class="nav-number">1.5.</span> <span class="nav-text">操作各种文件</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#文本文件（-txt）"><span class="nav-number">1.5.1.</span> <span class="nav-text">文本文件（.txt）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ini文件"><span class="nav-number">1.5.2.</span> <span class="nav-text">ini文件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#xml文件"><span class="nav-number">1.5.3.</span> <span class="nav-text">xml文件</span></a></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">嗷小蝶</span>
+
+  
+</div>
+
+
+  <!--<div class="powered-by">
+    由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+  </div>
+  -->
+
+  <div class="powered-by">
+  <i class="fa fa-user-md"></i><span id="busuanzi_container_site_uv">
+    本站访客数:<span id="busuanzi_value_site_uv"></span>
+  </span>
+  </div>
+
+  <span class="post-meta-divider">|</span>
+
+  <div class="theme-info">
+    主题 &mdash;
+    <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+      NexT.Muse
+    </a>
+  </div>
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.2"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.2"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
